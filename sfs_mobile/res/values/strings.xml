@@ -10,6 +10,7 @@
     <string name="messages_option">Messages</string>
     <string name="immun_option">Immunizations</string>
     <string name="home_option">Home</string>
+    <string name="shs_main_screen">UPenn SHS</string>
     <string name="title_activity_my_appointments">MyAppointments</string>
 
 </resources>

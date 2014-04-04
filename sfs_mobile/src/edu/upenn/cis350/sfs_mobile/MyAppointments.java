@@ -97,7 +97,7 @@ public class MyAppointments extends Activity {
 		        // Add your data
 		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
 		        nameValuePairs.add(new BasicNameValuePair("pennkey", "alice"));
-		        nameValuePairs.add(new BasicNameValuePair("auth_token", "1658364135"));
+		        nameValuePairs.add(new BasicNameValuePair("auth_token", "1172611454"));
 		        nameValuePairs.add(new BasicNameValuePair("get_my_appts", ""));
 		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 		        System.out.println("hello " + httppost.toString());

@@ -9,8 +9,17 @@
     tools:context=".HomeScreen" >
 
     <TextView
-        android:layout_width="wrap_content"
+        android:id="@+id/textView1"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:gravity="center"
+        android:text="@string/shs_main_screen" />
+
+    <ImageView
+        android:id="@+id/penn_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignLeft="@+id/textView1"
+        android:src="@drawable/penn_logo" />
 
 </RelativeLayout>
