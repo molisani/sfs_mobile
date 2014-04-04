@@ -22,6 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.DisplayImmunizations"
+            android:label="@string/title_activity_display_immunizations"
+            android:parentActivityName="edu.upenn.cis350.graphics.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.upenn.cis350.graphics.MainActivity" />
+        </activity>
     </application>
 
 </manifest>
