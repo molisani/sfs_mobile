@@ -25,7 +25,7 @@ public class ServerPOST {
 
 
 	public ServerPOST(String php) {
-		url = "http://fling.seas.upenn.edu/~molisani/cgi-bin/" + php;
+		url = "https://fling.seas.upenn.edu/~molisani/cgi-bin/" + php;
 		query = new ArrayList<NameValuePair>();
 	}
 
@@ -33,7 +33,7 @@ public class ServerPOST {
 		query.add(new BasicNameValuePair(key, value));
 	}
 
-	public void execute() {
+	public JSONObject execute() {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
 		try {
@@ -52,10 +52,7 @@ public class ServerPOST {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-	}
-
-	public JSONObject getResult() {
-		if (jsobj == null) throw new RuntimeException("Request has not been executed yet");
+		System.out.println("returning " + jsobj.toString());
 		return jsobj;
 	}
 }
