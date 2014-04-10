@@ -31,11 +31,6 @@
         <activity
             android:name="edu.upenn.cis350.sfs_mobile.HomeScreen"
             android:label="@string/title_activity_home_screen" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name="edu.upenn.cis350.sfs_mobile.MyAppointments"
