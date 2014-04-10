@@ -54,10 +54,9 @@ public class LoginActivity extends Activity {
 		protected void onPostExecute(JSONObject json) {
 			try {
 				if (json.getBoolean("success")) {
-					//direct to homescreen if validated
 					Intent i = new Intent(LoginActivity.this, HomeScreen.class);
 					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-					//i.putExtra("Session_ID", json.getInt("message"));
+					i.putExtra("Session_ID", json.getInt("message"));
 					startActivityForResult(i, 1);
 				} else {
 					Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
