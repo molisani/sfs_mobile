@@ -9,6 +9,7 @@ import edu.upenn.cis350.sfs_mobile.ServerPOST;
 
 public class ServerPOSTTest {
 
+	
 	//@Test
 	public void testLogin() {
 		ServerPOST post = new ServerPOST("auth.php");

@@ -14,4 +14,12 @@
         android:layout_height="wrap_content"
         android:text="" />
 
+    <ListView
+        android:id="@+id/listView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/my_appts_json"
+        android:layout_alignTop="@+id/my_appts_json" >
+    </ListView>
+
 </RelativeLayout>

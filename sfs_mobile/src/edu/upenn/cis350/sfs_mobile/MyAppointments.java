@@ -83,7 +83,7 @@ public class MyAppointments extends Activity {
 		protected JSONObject doInBackground(String... inputs) {
 			ServerPOST post = new ServerPOST("appt.php");
 			post.addField("pennkey", "alice");
-			post.addField("auth_token", "173737141");
+			post.addField("auth_token", "1302956159");
 			post.addField("get_my_appts", "");
 			return post.execute();
 		}
@@ -98,7 +98,7 @@ public class MyAppointments extends Activity {
 						Appointment tempAppt = new Appointment(
 								curr.getString("immunization").toString(),
 								curr.getString("duration").toString(),
-								curr.getString("appt_time").toString(),
+								new Timestamp(curr.getString("appt_time").toString()),
 								curr.getString("appointment_id").toString(),
 								curr.getString("department").toString(),
 								curr.getString("subtype").toString());
