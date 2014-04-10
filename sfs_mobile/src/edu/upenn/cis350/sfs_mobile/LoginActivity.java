@@ -1,5 +1,7 @@
 package edu.upenn.cis350.sfs_mobile;
 
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -19,6 +21,7 @@ public class LoginActivity extends Activity {
 	private EditText password = null;
 	private EditText DOB = null;
 	private Spinner year, month, day;
+	private HashMap<String, String> monthint = new HashMap<String, String>();
 	private Button login;
 	int counter = 5;
 	
@@ -28,8 +31,23 @@ public class LoginActivity extends Activity {
 		setContentView(R.layout.activity_login);
 		username = (EditText)findViewById(R.id.editText1);
 		password = (EditText)findViewById(R.id.editText2);
-		DOB = (EditText)findViewById(R.id.editText3);
+		//DOB = (EditText)findViewById(R.id.editText3);
+		year = (Spinner)findViewById(R.id.spinneryear);
+		month = (Spinner)findViewById(R.id.spinnermonth);
+		day = (Spinner)findViewById(R.id.spinnerday);
 		login = (Button)findViewById(R.id.button1);
+		monthint.put("January", "01");
+		monthint.put("February", "02");
+		monthint.put("March", "03");
+		monthint.put("April", "04");
+		monthint.put("May", "05");
+		monthint.put("June", "06");
+		monthint.put("July", "07");
+		monthint.put("August", "08");
+		monthint.put("September", "09");
+		monthint.put("October", "10");
+		monthint.put("November", "11");
+		monthint.put("December", "12");
 	}
 	
 	public void login (View v) {
@@ -41,11 +59,8 @@ public class LoginActivity extends Activity {
 			ServerPOST post = new ServerPOST("auth.php");
 			post.addField("login", "");
 			post.addField("pennkey", username.getText().toString());
-			System.out.println("poop1 " + username.getText().toString());
 			post.addField("password", password.getText().toString());
-			System.out.println(password.getText().toString());
-			post.addField("birthday", DOB.getText().toString());
-			System.out.println(DOB.getText().toString());
+			post.addField("birthday", String.valueOf(year.getSelectedItem() + "-" + monthint.get(String.valueOf(month.getSelectedItem())) + "-" + String.valueOf(day.getSelectedItem())));
 			JSONObject json = post.execute();
 			return json;
 		}

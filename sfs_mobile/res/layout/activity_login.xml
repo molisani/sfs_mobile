@@ -15,16 +15,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_gravity="fill"/>
-    
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="186dp"
-        android:onClick="login"
-        android:text="@string/Login" />
 
     <EditText
         android:id="@+id/editText1"
@@ -52,17 +42,6 @@
         android:inputType="textPassword"
         android:hint="@string/Password" />
     
-    <EditText
-        android:id="@+id/editText3"
-        android:labelFor="@id/editText3"
-        android:inputType="text"
-        android:layout_width="257dp"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/editText2"
-        android:layout_below="@+id/editText2"
-        android:layout_marginTop="16dp"
-        android:ems="10"
-        android:hint="@string/Birthday" />
     
     <ImageView
         android:id="@+id/penn_logo"
@@ -73,29 +52,38 @@
         android:src="@drawable/penn_logo" />
 
     <Spinner
-        android:id="@+id/spinneryear"
-        android:layout_width="wrap_content"
+        android:id="@+id/spinnerday"
+        android:layout_width="100dp"        
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignTop="@+id/button1"
-        android:entries="@array/year_array"
-        android:layout_marginTop="52dp" />
+        android:layout_alignRight="@+id/editText2"
+        android:layout_alignTop="@+id/spinnermonth"
+        android:layout_toRightOf="@+id/spinnermonth"
+        android:entries="@array/day_array" />
 
     <Spinner
         android:id="@+id/spinnermonth"
-        android:layout_width="wrap_content"
+        android:layout_width="100dp"     
         android:layout_height="wrap_content"
-        android:layout_above="@+id/spinnerday"
-        android:entries="@array/month_array"
-        android:layout_alignParentLeft="true" />
+        android:layout_alignTop="@+id/spinneryear"
+        android:layout_toRightOf="@+id/spinneryear"
+        android:entries="@array/month_array" />
 
     <Spinner
-        android:id="@+id/spinnerday"
+        android:id="@+id/spinneryear"
+        android:layout_width="100dp"     
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:entries="@array/year_array" />
+
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:entries="@array/day_array"
-        android:layout_marginBottom="14dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:onClick="login"
+        android:text="@string/Login" />
 
 </RelativeLayout>
