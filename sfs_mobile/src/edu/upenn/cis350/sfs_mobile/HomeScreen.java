@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 public class HomeScreen extends Activity {
+	private Bundle extras = null; 
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +27,9 @@ public class HomeScreen extends Activity {
 	    ActionBar ab = getActionBar(); 
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
         ab.setBackgroundDrawable(colorDrawable);
-        getActionBar().setTitle("Home");   
+        getActionBar().setTitle("Home");  
+	    Intent i = getIntent();
+	    extras = i.getExtras();
 	    return super.onCreateOptionsMenu(menu);
 	}
 	
@@ -38,6 +41,7 @@ public class HomeScreen extends Activity {
 	            return true;
 	        case R.id.my_appts_action:
 	        	Intent intent = new Intent(this, MyAppointments.class);
+	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
 	        case R.id.immun_actions:

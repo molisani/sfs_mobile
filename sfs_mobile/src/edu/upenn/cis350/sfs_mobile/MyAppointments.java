@@ -20,7 +20,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 public class MyAppointments extends Activity {
-
+	private int id = 0;
+	private String username = "";
+	private Bundle extras = null;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -29,6 +32,10 @@ public class MyAppointments extends Activity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
         ab.setBackgroundDrawable(colorDrawable);
         getActionBar().setTitle("My Appointments");  
+        Intent i = getIntent();
+        extras = i.getExtras();
+	    id = i.getExtras().getInt("Session_ID");
+	    username = i.getExtras().getString("Session_Username");
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
@@ -52,6 +59,7 @@ public class MyAppointments extends Activity {
 	            return true;
 	        case R.id.home_action:
 	        	Intent intent = new Intent(this, HomeScreen.class);
+	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
 	        case R.id.immun_actions:
@@ -82,8 +90,8 @@ public class MyAppointments extends Activity {
 	class BackgroundTask extends AsyncTask<String, Void, JSONObject> {
 		protected JSONObject doInBackground(String... inputs) {
 			ServerPOST post = new ServerPOST("appt.php");
-			post.addField("pennkey", "alice");
-			post.addField("auth_token", "1302956159");
+			post.addField("pennkey", username);
+			post.addField("auth_token", id + "");
 			post.addField("get_my_appts", "");
 			return post.execute();
 		}
