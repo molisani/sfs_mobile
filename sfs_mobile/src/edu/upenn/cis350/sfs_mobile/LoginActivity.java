@@ -1,12 +1,21 @@
 package edu.upenn.cis350.sfs_mobile;
 
+import java.util.LinkedList;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import edu.upenn.cis350.sfs_mobile.HomeScreen;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	private EditText username = null;
@@ -26,12 +35,36 @@ public class LoginActivity extends Activity {
 	}
 	
 	public void login (View v) {
-		// credential verification
-		ServerPOST post = new ServerPost();
-		// direct to homescreen if validated
-		Intent i = new Intent(this, HomeScreen.class);
-		i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-		i.putExtra("EXIT", true);
-		startActivityForResult(i, 1);
+		new BackgroundTask().execute();
     }
+	
+	class BackgroundTask extends AsyncTask<String, Void, JSONObject> {
+		protected JSONObject doInBackground(String... inputs) {
+			ServerPOST post = new ServerPOST("auth.php");
+			post.addField("login", "");
+			post.addField("pennkey", username.getText().toString());
+			System.out.println("poop1 " + username.getText().toString());
+			post.addField("password", password.getText().toString());
+			System.out.println(password.getText().toString());
+			post.addField("birthday", DOB.getText().toString());
+			System.out.println(DOB.getText().toString());
+			JSONObject json = post.execute();
+			return json;
+		}
+		protected void onPostExecute(JSONObject json) {
+			try {
+				if (json.getBoolean("success")) {
+					//direct to homescreen if validated
+					Intent i = new Intent(LoginActivity.this, HomeScreen.class);
+					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+					//i.putExtra("Session_ID", json.getInt("message"));
+					startActivityForResult(i, 1);
+				} else {
+					Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+				}
+			} catch (JSONException e) {
+			}	
+		}
+	}
+
 }

@@ -14,7 +14,7 @@
     <string name="title_activity_my_appointments">MyAppointments</string>
     <string name="Login">Login</string>
     <string name="PennKey">PennKey</string>
-    <string name="Password">Password</string><string name="Birthday">Date of Birth (MM/DD/YYYY)</string>
+    <string name="Password">Password</string><string name="Birthday">Date of Birth (YYYY-MM-DD)</string>
     <string name="PennLogo">Penn Logo</string>
     <string name="title_activity_login">Login</string>
     
