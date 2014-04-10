@@ -72,4 +72,30 @@
         android:contentDescription="@string/PennLogo"
         android:src="@drawable/penn_logo" />
 
+    <Spinner
+        android:id="@+id/spinneryear"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/button1"
+        android:entries="@array/year_array"
+        android:layout_marginTop="52dp" />
+
+    <Spinner
+        android:id="@+id/spinnermonth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/spinnerday"
+        android:entries="@array/month_array"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:id="@+id/spinnerday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:entries="@array/day_array"
+        android:layout_marginBottom="14dp" />
+
 </RelativeLayout>

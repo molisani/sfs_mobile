@@ -1,8 +1,5 @@
 package edu.upenn.cis350.sfs_mobile;
 
-import java.util.LinkedList;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,13 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 	private EditText username = null;
 	private EditText password = null;
 	private EditText DOB = null;
+	private Spinner year, month, day;
 	private Button login;
 	int counter = 5;
 	
@@ -57,6 +55,7 @@ public class LoginActivity extends Activity {
 					Intent i = new Intent(LoginActivity.this, HomeScreen.class);
 					i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 					i.putExtra("Session_ID", json.getInt("message"));
+					i.putExtra("Session_Username", username.getText().toString());
 					startActivityForResult(i, 1);
 				} else {
 					Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
