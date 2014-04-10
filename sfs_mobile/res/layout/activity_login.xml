@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:columnCount="1"
+    android:orientation="horizontal" 
+    tools:context=".LoginActivity">
+
+    <Space
+        android:id="@+id/Space1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="fill"/>
+    
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="186dp"
+        android:onClick="login"
+        android:text="@string/Login" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:labelFor="@id/editText1"
+        android:inputType="text"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:hint="@string/PennKey" >
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editText2"
+        android:labelFor="@id/editText2"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText1"
+        android:layout_below="@+id/editText1"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:hint="@string/Password" />
+    
+    <EditText
+        android:id="@+id/editText3"
+        android:labelFor="@id/editText3"
+        android:inputType="text"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/Birthday" />
+    
+    <ImageView
+        android:id="@+id/penn_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha=".1"
+        android:contentDescription="@string/PennLogo"
+        android:src="@drawable/penn_logo" />
+
+</RelativeLayout>
