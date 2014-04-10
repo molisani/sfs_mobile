@@ -52,5 +52,10 @@ public class HomeScreen extends Activity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	@Override
+	public void onBackPressed() {
+	}
+
 
 }
