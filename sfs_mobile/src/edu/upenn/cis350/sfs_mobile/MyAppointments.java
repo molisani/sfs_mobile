@@ -1,21 +1,9 @@
 package edu.upenn.cis350.sfs_mobile;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.*;
-
+import java.util.LinkedList;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -30,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.os.Build;
 
 public class MyAppointments extends Activity {
 
@@ -92,46 +79,42 @@ public class MyAppointments extends Activity {
 			return rootView;
 		}
 	}
-	class BackgroundTask extends AsyncTask<String, Void, String> {
-		protected String doInBackground(String... inputs) {
-			// Create a new HttpClient and Post Header
-		    HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost("https://fling.seas.upenn.edu/~molisani/cgi-bin/appt.php");
-		
-		    try {
-		        // Add your data
-		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
-		        nameValuePairs.add(new BasicNameValuePair("pennkey", "alice"));
-		        nameValuePairs.add(new BasicNameValuePair("auth_token", "1172611454"));
-		        nameValuePairs.add(new BasicNameValuePair("get_my_appts", ""));
-		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
-		        System.out.println("hello " + httppost.toString());
-
-		        // Execute HTTP Post Request
-		        HttpResponse response = httpclient.execute(httppost);
-		        BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));
-		        StringBuilder builder = new StringBuilder();
-		        for (String line = null; (line = reader.readLine()) != null;) {
-		            builder.append(line).append("\n");
-		        }
-
-		        JSONTokener tokener = new JSONTokener(builder.toString());
-		        return tokener.toString();
-		        //JSONArray finalResult = new JSONArray(tokener);
-		        //return finalResult.toString();
-		    } catch (ClientProtocolException e) {
-		        System.out.println("Exception1--");
-		    } catch (IOException e) {
-		        System.out.println("Exception2--");
-		    } /*catch (JSONException e) {
-		        System.out.println("Exception3--");
-				e.printStackTrace();
-			} */
-			return null;
+	class BackgroundTask extends AsyncTask<String, Void, JSONObject> {
+		protected JSONObject doInBackground(String... inputs) {
+			ServerPOST post = new ServerPOST("appt.php");
+			post.addField("pennkey", "alice");
+			post.addField("auth_token", "173737141");
+			post.addField("get_my_appts", "");
+			return post.execute();
 		}
-		protected void onPostExecute(String input) {
+		protected void onPostExecute(JSONObject input) {
 			TextView jsonTextView = (TextView) findViewById(R.id.my_appts_json);
-	        jsonTextView.setText(input);
+			JSONArray arr = null;
+			LinkedList<Appointment> apptArr = new LinkedList<Appointment>();
+			try {
+				arr = input.getJSONArray("appts");
+				for (int i = 0; i < arr.length(); i++) {
+						JSONObject curr = (JSONObject) arr.get(i);
+						Appointment tempAppt = new Appointment(
+								curr.getString("immunization").toString(),
+								curr.getString("duration").toString(),
+								curr.getString("appt_time").toString(),
+								curr.getString("appointment_id").toString(),
+								curr.getString("department").toString(),
+								curr.getString("subtype").toString());
+						apptArr.add(tempAppt);
+				}
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+				
+			String printAppts = "";
+			for (Appointment a : apptArr) {
+				printAppts += a.toString() + "\n\n";
+			}
+			jsonTextView.setText(printAppts);
+
+	
 		}
 	}
 
