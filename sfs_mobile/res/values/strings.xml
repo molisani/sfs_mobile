@@ -17,6 +17,7 @@
     <string name="Password">Password</string><string name="Birthday">Date of Birth (YYYY-MM-DD)</string>
     <string name="PennLogo">Penn Logo</string>
     <string name="title_activity_login">Login</string>
+    <string name="logout">Logout</string>
     <string-array name="year_array">
         <item>2010</item>
         <item>2009</item>

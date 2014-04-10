@@ -48,6 +48,9 @@ public class HomeScreen extends Activity {
 	            return true;
 	        case R.id.messages_action:
 	            return true;
+	        case R.id.logout:
+	        	intent = new Intent(this, LoginActivity.class);
+	        	startActivity(intent);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }

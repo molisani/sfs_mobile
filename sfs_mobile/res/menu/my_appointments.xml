@@ -11,4 +11,7 @@
     <item android:id="@+id/immun_actions"
           android:title="@string/immun_option"
           android:showAsAction="never" />
+    <item android:id="@+id/logout"
+          android:title="@string/logout"
+          android:showAsAction="never" />
 </menu>

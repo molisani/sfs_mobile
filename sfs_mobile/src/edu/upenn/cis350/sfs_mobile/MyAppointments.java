@@ -54,11 +54,12 @@ public class MyAppointments extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 	    // Handle presses on the action bar items
+		Intent intent = null;
 	    switch (item.getItemId()) {
 	        case R.id.make_appts_option:
 	            return true;
 	        case R.id.home_action:
-	        	Intent intent = new Intent(this, HomeScreen.class);
+	        	intent = new Intent(this, HomeScreen.class);
 	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
@@ -66,6 +67,9 @@ public class MyAppointments extends Activity {
 	            return true;
 	        case R.id.messages_action:
 	            return true;
+	        case R.id.logout:
+	        	intent = new Intent(this, LoginActivity.class);
+	        	startActivity(intent);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
