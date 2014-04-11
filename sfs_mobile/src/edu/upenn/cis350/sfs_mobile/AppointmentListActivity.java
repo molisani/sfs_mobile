@@ -116,7 +116,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 					itemText.equals(appointmentTypes[0]) || // immunizations
 					itemText.equals(appointmentTypes[1]) || // health & wellness
 					itemText.equals(appointmentTypes[4])) {	// women's health
-				intent = new Intent(this, AppointmentListActivity.class);
+				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
 				intent.putExtras(this.getIntent().getExtras());
 				if (itemText.equals(appointmentTypes[0]))
 					intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
@@ -127,7 +127,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 			} else if (
 					itemText.equals(appointmentTypes[2]) || // primary care
 					itemText.equals(appointmentTypes[3])) {	// sports medicine
-				intent = new Intent(this, AppointmentMessageActivity.class);
+				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class);
 				intent.putExtras(this.getIntent().getExtras());
 				if (itemText.equals(appointmentTypes[2]))
 					intent.putExtra(AppointmentListActivity.DEPARTMENT, "p");
@@ -143,13 +143,13 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 		} else if (lastScreen.equals("appointment_types")) {
 			if (valueClicked.equals(appointmentTypes[0])) { // immunizations
 				if (itemText.equals(immunizationTypes[0])) { // other immunizations
-					intent = new Intent(this, AppointmentListActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 				} else if (
 						itemText.equals(immunizationTypes[1]) || // ppd placement
 						itemText.equals(immunizationTypes[2]) || // flu vaccination
 						itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
-					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 					intent.putExtra(NEXT_SCREEN, "callback");
 				} else {
@@ -160,13 +160,13 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 				intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
 			} else if (valueClicked.equals(appointmentTypes[1])) { // health and wellness
 				if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
-					intent = new Intent(this, AppointmentListActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 				} else if (
 						itemText.equals(healthAndWellnessTypes[1]) || // HIV
 						itemText.equals(healthAndWellnessTypes[2]) || // smoking
 						itemText.equals(healthAndWellnessTypes[3])) { // stress
-					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 					intent.putExtra(NEXT_SCREEN, "reason");
 				} else {
@@ -180,11 +180,11 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 						itemText.equals(womensHealthTypes[0]) ||
 						itemText.equals(womensHealthTypes[1]) ||
 						itemText.equals(womensHealthTypes[2])) {
-					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 					intent.putExtra(NEXT_SCREEN, "reason");	
 				} else if (itemText.equals(womensHealthTypes[3])) {
-					intent = new Intent(this, AppointmentMessageActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 				} else {
 					System.out.println("ERROR 103: Could not identify next activity");
@@ -200,14 +200,14 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 		
 		// subImmunizationTypes
 		} else if (lastScreen.equals("immunization_types")) {
-			intent = new Intent(this, AppointmentTextInputActivity.class);
+			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
 			intent.putExtras(this.getIntent().getExtras());
 			intent.putExtra(NEXT_SCREEN, "callback");
 			intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
 		
 		// acupunctureTypes
 		} else if (lastScreen.equals("health_and_wellness_types")) {
-			intent = new Intent(this, AppointmentTextInputActivity.class);
+			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
 			intent.putExtras(this.getIntent().getExtras());
 			intent.putExtra(NEXT_SCREEN, "reason");
 			intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
