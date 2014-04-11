@@ -24,6 +24,10 @@ public class Appointment {
 		makeDepartments();
 	}
 	
+	public int getId() {
+		return id;
+	}
+	
 	private void makeDepartments() {
 		departments.put("i", "Immunization");
 		departments.put("p", "Primary Care");
