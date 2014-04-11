@@ -2,11 +2,15 @@ package edu.upenn.cis350.sfs_mobile;
 
 /**
  * Used in the initial screen after you click make appointment, also at various places within the workflow
+
  */
 
 import android.os.Bundle;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.text.InputFilter.LengthFilter;
 import android.view.Menu;
 import android.view.View;
@@ -42,6 +46,9 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ActionBar ab = getActionBar(); 
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
+        ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_appointment_list);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
@@ -76,7 +83,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getMenuInflater().inflate(R.menu.display_immunizations, menu);
 		return true;
 	}
 
