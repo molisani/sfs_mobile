@@ -53,7 +53,7 @@ public class AppointmentMessageActivity extends Activity {
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.appointment_message, menu);
+		getMenuInflater().inflate(R.menu.appt_list_activity, menu);
 		return true;
 	}
 

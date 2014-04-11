@@ -9,7 +9,7 @@
     tools:context="edu.upenn.cis350.sfs_mobile.MyAppointments$PlaceholderFragment" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/submitButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="refresh"
@@ -19,9 +19,9 @@
         android:id="@+id/my_appts_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/button1"
+        android:layout_alignLeft="@+id/submitButton"
         android:layout_alignParentBottom="true"
-        android:layout_below="@+id/button1" >
+        android:layout_below="@+id/submitButton" >
 
     </ListView>
 

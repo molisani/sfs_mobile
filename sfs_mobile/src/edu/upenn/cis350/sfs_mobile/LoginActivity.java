@@ -35,13 +35,13 @@ public class LoginActivity extends Activity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
         ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
-		username = (EditText)findViewById(R.id.editText1);
+		username = (EditText)findViewById(R.id.phoneNumberField);
 		password = (EditText)findViewById(R.id.editText2);
 		//DOB = (EditText)findViewById(R.id.editText3);
 		year = (Spinner)findViewById(R.id.spinneryear);
 		month = (Spinner)findViewById(R.id.spinnermonth);
 		day = (Spinner)findViewById(R.id.spinnerday);
-		login = (Button)findViewById(R.id.button1);
+		login = (Button)findViewById(R.id.submitButton);
 		monthint.put("January", "01");
 		monthint.put("February", "02");
 		monthint.put("March", "03");

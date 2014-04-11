@@ -24,6 +24,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 	private String lastScreen, valueClicked; // values from the keys defined below
 	static final String LAST_SCREEN = "edu.upenn.cis350.sfs_mobile.LAST_SCREEN"; // key for the extra telling which screen we're coming from
 	static final String VALUE_CLICKED = "edu.upenn.cis350.sfs_mobile.VALUE_CLICKED"; // key for the extra telling which button we last clicked
+	static final String NEXT_SCREEN = "edu.upenn.cis350.sfs_mobile.NEXT_SCREEN";
 	
 	ListView listView;
 	
@@ -126,12 +127,22 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 						itemText.equals(immunizationTypes[1]) || // ppd placement
 						itemText.equals(immunizationTypes[2]) || // flu vaccination
 						itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
-					// callback
+					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent.putExtra(NEXT_SCREEN, "callback");
 				} else {
 					System.out.println("ERROR 101: Could not identify list item clicked");
 					return;
 				}
 			} else if (valueClicked.equals(appointmentTypes[1])) { // health and wellness
+				if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
+					// list
+				} else if (
+						itemText.equals(healthAndWellnessTypes[1]) || // HIV
+						itemText.equals(healthAndWellnessTypes[1]) || // smoking
+						itemText.equals(healthAndWellnessTypes[1])) { // stress
+					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent.putExtra(NEXT_SCREEN, "reason");
+				}
 				// options
 			} else if (valueClicked.equals(appointmentTypes[4])) { // women's health
 				// options

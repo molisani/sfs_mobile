@@ -20,7 +20,8 @@
     <string name="title_activity_login">Login</string>
     <string name="logout">Logout</string>
     <string name="title_activity_display_immunizations">Immunizations</string>
-	<string name="refresh">Refresh</string>
+    <string name="refresh">Refresh</string>
+
     <string-array name="year_array">
         <item>2010</item>
         <item>2009</item>
@@ -132,5 +133,6 @@
     </string-array>
 
     <string name="title_activity_appointment_message">AppointmentMessageActivity</string>
+    <string name="title_activity_appointment_text_input">AppointmentTextInputActivity</string>
 
 </resources>
