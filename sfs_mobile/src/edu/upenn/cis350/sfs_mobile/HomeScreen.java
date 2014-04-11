@@ -27,7 +27,7 @@ public class HomeScreen extends Activity {
 	    ActionBar ab = getActionBar(); 
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
         ab.setBackgroundDrawable(colorDrawable);
-        getActionBar().setTitle("Home");  
+        getActionBar().setTitle("SFS Mobile");  
 	    Intent i = getIntent();
 	    extras = i.getExtras();
 	    return super.onCreateOptionsMenu(menu);

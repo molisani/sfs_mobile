@@ -35,6 +35,7 @@ public class LoginActivity extends Activity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
         ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
+        getActionBar().setTitle("SFS Mobile");  
 		username = (EditText)findViewById(R.id.phoneNumberField);
 		password = (EditText)findViewById(R.id.editText2);
 		//DOB = (EditText)findViewById(R.id.editText3);

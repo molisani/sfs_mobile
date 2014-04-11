@@ -33,7 +33,8 @@ public class MyAppointments extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_my_appointments);
 		ActionBar ab = getActionBar(); 
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E")); 
+        getActionBar().setTitle("SFS Mobile");  
         ab.setBackgroundDrawable(colorDrawable);
         getActionBar().setTitle("My Appointments");  
         Intent i = getIntent();
@@ -61,6 +62,10 @@ public class MyAppointments extends Activity {
 		Intent intent = null;
 	    switch (item.getItemId()) {
 	        case R.id.make_appts_option:
+	        	intent = new Intent(this, AppointmentListActivity.class);
+	        	intent.putExtra("edu.upenn.cis350.sfs_mobile.LAST_SCREEN", "make_appointment");
+	        	intent.putExtras(extras);
+	        	startActivity(intent);
 	            return true;
 	        case R.id.home_action:
 	        	intent = new Intent(this, HomeScreen.class);
