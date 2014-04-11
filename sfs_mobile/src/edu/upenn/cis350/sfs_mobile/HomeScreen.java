@@ -40,6 +40,7 @@ public class HomeScreen extends Activity {
 	        case R.id.make_appts_option:
 	        	Intent intent = new Intent(this, AppointmentListActivity.class);
 	        	intent.putExtra("edu.upenn.cis350.sfs_mobile.LAST_SCREEN", "make_appointment");
+	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
 	        case R.id.my_appts_action:
