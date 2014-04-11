@@ -6,8 +6,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import edu.upenn.cis350.sfs_mobile.HomeScreen;
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -28,6 +31,9 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		ActionBar ab = getActionBar(); 
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
+        ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
 		username = (EditText)findViewById(R.id.editText1);
 		password = (EditText)findViewById(R.id.editText2);

@@ -8,18 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.upenn.cis350.sfs_mobile.MyAppointments$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/my_appts_json"
+    <Button
+        android:id="@+id/button1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="" />
+        android:onClick="refresh"
+        android:text="@string/refresh" />
 
     <ListView
-        android:id="@+id/immunizationTypeListView"
+        android:id="@+id/my_appts_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/my_appts_json"
-        android:layout_alignTop="@+id/my_appts_json" >
+        android:layout_alignLeft="@+id/button1"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/button1" >
+
     </ListView>
 
 </RelativeLayout>

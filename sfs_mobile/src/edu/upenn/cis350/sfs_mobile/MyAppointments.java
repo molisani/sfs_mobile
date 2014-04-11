@@ -1,9 +1,11 @@
 package edu.upenn.cis350.sfs_mobile;
 
 import java.util.LinkedList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
@@ -17,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class MyAppointments extends Activity {
@@ -74,6 +78,10 @@ public class MyAppointments extends Activity {
 	            return super.onOptionsItemSelected(item);
 	    }
 	}
+	
+	public void refresh(View v) {
+		(new BackgroundTask()).execute();
+	}
 
 	/**
 	 * A placeholder fragment containing a simple view.
@@ -100,7 +108,6 @@ public class MyAppointments extends Activity {
 			return post.execute();
 		}
 		protected void onPostExecute(JSONObject input) {
-			TextView jsonTextView = (TextView) findViewById(R.id.my_appts_json);
 			JSONArray arr = null;
 			LinkedList<Appointment> apptArr = new LinkedList<Appointment>();
 			try {
@@ -121,12 +128,13 @@ public class MyAppointments extends Activity {
 			}
 				
 			String printAppts = "";
-			for (Appointment a : apptArr) {
-				printAppts += a.toString() + "\n\n";
+			String[] content = new String[apptArr.size()];
+			for (int i = 0; i < apptArr.size(); i++) {
+				content[i] = apptArr.get(i).toString();
 			}
-			jsonTextView.setText(printAppts);
-
-	
+			ListView listView = (ListView) findViewById(R.id.my_appts_list);
+			ArrayAdapter atlAdapter = new ArrayAdapter(MyAppointments.this, android.R.layout.simple_list_item_1 , content);
+			listView.setAdapter(atlAdapter);
 		}
 	}
 
