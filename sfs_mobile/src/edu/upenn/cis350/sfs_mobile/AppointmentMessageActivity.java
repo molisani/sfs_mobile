@@ -39,7 +39,7 @@ public class AppointmentMessageActivity extends Activity {
 		if (lastScreen.equals("appointment_types")) {
 			if (valueClicked.equals(AppointmentListActivity.appointmentTypes[2])) { // primary care
 				content = primaryCareMessages;
-			} else if (valueClicked.equals(AppointmentListActivity.appointmentTypes[3])) { // sports medicine
+			} else if (valueClicked.equals(AppointmentListActivity.appointmentTypes[3])) { // sport medicine
 				content = sportsMedicineMessages;
 			} else {
 				System.out.println("Error 200: Could not determine button clicked.");

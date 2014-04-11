@@ -164,11 +164,14 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 					intent.putExtras(this.getIntent().getExtras());
 				} else if (
 						itemText.equals(healthAndWellnessTypes[1]) || // HIV
-						itemText.equals(healthAndWellnessTypes[1]) || // smoking
-						itemText.equals(healthAndWellnessTypes[1])) { // stress
+						itemText.equals(healthAndWellnessTypes[2]) || // smoking
+						itemText.equals(healthAndWellnessTypes[3])) { // stress
 					intent = new Intent(this, AppointmentTextInputActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
 					intent.putExtra(NEXT_SCREEN, "reason");
+				} else {
+					System.out.println("Error 505: Could not determine next activity.");
+					return;
 				}
 				intent.putExtra(LAST_SCREEN, "health_and_wellness_types");
 				intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
@@ -179,16 +182,15 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 						itemText.equals(womensHealthTypes[2])) {
 					intent = new Intent(this, AppointmentTextInputActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
-					intent.putExtra(NEXT_SCREEN, "reason");
-					intent.putExtra(LAST_SCREEN, "womens_health_types");
+					intent.putExtra(NEXT_SCREEN, "reason");	
 				} else if (itemText.equals(womensHealthTypes[3])) {
 					intent = new Intent(this, AppointmentMessageActivity.class);
 					intent.putExtras(this.getIntent().getExtras());
-					intent.putExtra(LAST_SCREEN, "acupuncture_types");
 				} else {
 					System.out.println("ERROR 103: Could not identify next activity");
 					return;
 				}
+				intent.putExtra(LAST_SCREEN, "womens_health_types");
 				intent.putExtra(AppointmentListActivity.DEPARTMENT, "w");
 				
 			} else {
