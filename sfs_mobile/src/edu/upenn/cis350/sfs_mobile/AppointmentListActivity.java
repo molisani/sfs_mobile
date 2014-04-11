@@ -49,6 +49,9 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 			"Meningococcal (satisfied requirement)", "MMR (required for measles, mumps, rubella",
 			"Multiple Immunizations", "Tdap (satisfied requirement)", "Varicella (satisfies requirement)", "Other"
 	};
+	static final String[] acupunctureTypes = {
+		"Acupuncture - initial visit", "Acupuncture Follow-Up Visit", "Massage Therapy Visit"
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -133,9 +136,10 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 					System.out.println("ERROR 101: Could not identify list item clicked");
 					return;
 				}
+				intent.putExtra(LAST_SCREEN, "immunization_types");
 			} else if (valueClicked.equals(appointmentTypes[1])) { // health and wellness
 				if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
-					// list
+					intent = new Intent(this, AppointmentListActivity.class);
 				} else if (
 						itemText.equals(healthAndWellnessTypes[1]) || // HIV
 						itemText.equals(healthAndWellnessTypes[1]) || // smoking
@@ -143,15 +147,39 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 					intent = new Intent(this, AppointmentTextInputActivity.class);
 					intent.putExtra(NEXT_SCREEN, "reason");
 				}
-				// options
+				intent.putExtra(LAST_SCREEN, "health_and_wellness_types");
 			} else if (valueClicked.equals(appointmentTypes[4])) { // women's health
-				// options
+				if (
+						itemText.equals(womensHealthTypes[0]) ||
+						itemText.equals(womensHealthTypes[1]) ||
+						itemText.equals(womensHealthTypes[2])) {
+					intent = new Intent(this, AppointmentTextInputActivity.class);
+					intent.putExtra(NEXT_SCREEN, "reason");
+				} else if (itemText.equals(womensHealthTypes[3])) {
+					intent = new Intent(this, AppointmentMessageActivity.class);
+				} else {
+					System.out.println("ERROR 103: Could not identify next activity");
+					return;
+				}
+				intent.putExtra(LAST_SCREEN, "womens_health_types");
 			} else {
 				System.out.println("ERROR 102: Could not identify list item clicked");
 				return;
 			}
+		
+		// subImmunizationTypes
+		} else if (lastScreen.equals("immunization_types")) {
+			intent = new Intent(this, AppointmentTextInputActivity.class);
+			intent.putExtra(NEXT_SCREEN, "callback");
+		
+		// acupunctureTypes
+		} else if (lastScreen.equals("acupuncture_types")) {
+			intent = new Intent(this, AppointmentTextInputActivity.class);
+			intent.putExtra(NEXT_SCREEN, "reason");
+			
+		} else {
+			System.out.println("Error 50: Couldnot determine next activity.");
 		}
-		// TODO - add rest of possible screens
 		intent.putExtra(VALUE_CLICKED, itemText);
 		startActivity(intent);
 	}

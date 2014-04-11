@@ -134,5 +134,7 @@
 
     <string name="title_activity_appointment_message">AppointmentMessageActivity</string>
     <string name="title_activity_appointment_text_input">AppointmentTextInputActivity</string>
+    <string name="title_activity_appointment_calendar">AppointmentCalendar</string>
+    <string name="title_activity_appointment_book">AppointmentBookActivity</string>
 
 </resources>

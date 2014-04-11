@@ -21,6 +21,10 @@ public class AppointmentMessageActivity extends Activity {
 			"", "Currently we are unable to accept mobile booked appointments for sports medicine visits.",
 			"Please call SHS at 215-746-3535 during SHS operating hours and choose option 2 to book an appointment."
 	};
+	String[] womensHealthMessages = {
+			"", "", 
+			"Please Call 215-746-3535 and speak to a women's health nurse for assistance scheduling your appointment."
+	};
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,10 @@ public class AppointmentMessageActivity extends Activity {
 				System.out.println("Error 200: Could not determine button clicked.");
 				return;
 			}
+		} else if (lastScreen.equals("womens_health_types")) {
+			content = womensHealthMessages;
+		} else {
+			System.out.println("Error 300: Could not determine next activity.");
 		}
 		topTextView = (TextView) findViewById(R.id.textView1);
 		topTextView.setText(content[0]);

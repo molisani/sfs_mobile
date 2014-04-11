@@ -52,6 +52,14 @@
             android:name="edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity"
             android:label="@string/title_activity_appointment_text_input" >
         </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.AppointmentCalendarActivity"
+            android:label="@string/title_activity_appointment_calendar" >
+        </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.AppointmentBookActivity"
+            android:label="@string/title_activity_appointment_book" >
+        </activity>
     </application>
 
 </manifest>
