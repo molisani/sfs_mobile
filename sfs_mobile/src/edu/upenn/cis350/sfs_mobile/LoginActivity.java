@@ -76,6 +76,7 @@ public class LoginActivity extends Activity {
 					Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
+				
 			}	
 		}
 	}
