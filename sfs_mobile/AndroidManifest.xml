@@ -3,7 +3,7 @@
     package="edu.upenn.cis350.sfs_mobile"
     android:versionCode="1"
     android:versionName="1.0" >
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-sdk
@@ -43,6 +43,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.upenn.cis350.graphics.MainActivity" />
+        </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity"
+            android:label="@string/title_activity_appointment_message" >
         </activity>
     </application>
 

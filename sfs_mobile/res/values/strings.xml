@@ -14,11 +14,13 @@
     <string name="title_activity_my_appointments">MyAppointments</string>
     <string name="Login">Login</string>
     <string name="PennKey">PennKey</string>
-    <string name="Password">Password</string><string name="Birthday">Date of Birth (YYYY-MM-DD)</string>
+    <string name="Password">Password</string>
+    <string name="Birthday">Date of Birth (YYYY-MM-DD)</string>
     <string name="PennLogo">Penn Logo</string>
     <string name="title_activity_login">Login</string>
     <string name="logout">Logout</string>
     <string name="title_activity_display_immunizations">Immunizations</string>
+
     <string-array name="year_array">
         <item>2010</item>
         <item>2009</item>
@@ -81,7 +83,6 @@
         <item>1951</item>
         <item>1950</item>
     </string-array>
-    
     <string-array name="month_array">
         <item>January</item>
         <item>February</item>
@@ -96,7 +97,6 @@
         <item>November</item>
         <item>December</item>
     </string-array>
-    
     <string-array name="day_array">
         <item>1</item>
         <item>2</item>
@@ -130,6 +130,7 @@
         <item>30</item>
         <item>31</item>
     </string-array>
-    
+
+    <string name="title_activity_appointment_message">AppointmentMessageActivity</string>
 
 </resources>
