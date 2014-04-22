@@ -60,6 +60,10 @@
             android:name="edu.upenn.cis350.sfs_mobile.AppointmentBookActivity"
             android:label="@string/title_activity_appointment_book" >
         </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.MyMessages"
+            android:label="@string/title_activity_my_messages" >
+        </activity>
     </application>
 
 </manifest>

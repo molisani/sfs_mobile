@@ -51,6 +51,9 @@ public class HomeScreen extends Activity {
 	        case R.id.immun_actions:
 	            return true;
 	        case R.id.messages_action:
+	        	intent = new Intent(this, MyMessages.class);
+	        	intent.putExtras(extras);
+	        	startActivity(intent);
 	            return true;
 	        case R.id.logout:
 	        	intent = new Intent(this, LoginActivity.class);
