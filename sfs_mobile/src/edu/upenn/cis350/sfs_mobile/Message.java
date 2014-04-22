@@ -13,10 +13,7 @@ public class Message {
 		this.pennkey = pennkey;
 		this.name = name;
 		this.subj = subj;
-		if (read == 1)
-			this.read = true;
-		else
-			this.read = false;
+		this.read = read == 1;
 	}
 	
 	public int getId() {
