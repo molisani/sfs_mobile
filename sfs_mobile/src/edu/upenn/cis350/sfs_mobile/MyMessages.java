@@ -77,6 +77,10 @@ public class MyMessages extends Activity {
 	        case R.id.messages_action:
 	            return true;
 	        case R.id.logout:
+	        	Bundle b = getIntent().getExtras();
+	        	ServerPOSTLogout logout = new ServerPOSTLogout("auth.php",
+						b.getString("Session_Username"), b.getInt("Session_ID") + "");
+	        	logout.execute();
 	        	intent = new Intent(this, LoginActivity.class);
 	        	startActivity(intent);
 	        default:

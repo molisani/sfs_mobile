@@ -1,5 +1,9 @@
 package edu.upenn.cis350.sfs_mobile;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -9,6 +13,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 public class HomeScreen extends Activity {
 	private Bundle extras = null; 
@@ -56,15 +61,14 @@ public class HomeScreen extends Activity {
 	        	startActivity(intent);
 	            return true;
 	        case R.id.logout:
+				ServerPOSTLogout logout = new ServerPOSTLogout("auth.php",
+						extras.getString("Session_Username"), extras.getInt("Session_ID") + "");
+	        	logout.execute();
 	        	intent = new Intent(this, LoginActivity.class);
 	        	startActivity(intent);
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
-	}
-	
-	@Override
-	public void onBackPressed() {
 	}
 
 
