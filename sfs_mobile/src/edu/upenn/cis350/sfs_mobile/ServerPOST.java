@@ -22,6 +22,8 @@ public class ServerPOST {
 	private String url;
 	private List<NameValuePair> query;
 	private JSONObject jsobj;
+	private String reauth = "Pennkey and Auth Token did not pass verification,"
+			+ " may need to re-auth";
 
 
 	public ServerPOST(String php) {
@@ -43,6 +45,10 @@ public class ServerPOST {
 			String json = "";
 			for (String line = null; (line = reader.readLine()) != null;) json += line;
 		    jsobj = new JSONObject(json);
+			if (!jsobj.getBoolean("success") && jsobj.getString("message").equals(reauth)) {
+				return null;
+			}
+
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (ClientProtocolException e) {
@@ -52,7 +58,6 @@ public class ServerPOST {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		System.out.println("returning " + jsobj.toString());
 		return jsobj;
 	}
 }

@@ -20,9 +20,9 @@
             android:label="@string/app_name" >
         </activity>
         <activity
-            android:noHistory="true"
             android:name="edu.upenn.cis350.sfs_mobile.LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login"
+            android:noHistory="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +37,7 @@
             android:name="edu.upenn.cis350.sfs_mobile.MyAppointments"
             android:label="@string/title_activity_my_appointments" >
         </activity>
-        <activity 
+        <activity
             android:name="edu.upenn.cis350.sfs_mobile.ImmunizationAppointment"
             android:label="@string/title_activity_display_immunizations"
             android:parentActivityName="edu.upenn.cis350.graphics.MainActivity" >
@@ -64,6 +64,10 @@
         <activity
             android:name="edu.upenn.cis350.sfs_mobile.MyMessages"
             android:label="@string/title_activity_my_messages" >
+        </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.ReAuth"
+            android:label="@string/title_activity_re_auth" >
         </activity>
     </application>
 

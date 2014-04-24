@@ -21,6 +21,10 @@
     <string name="logout">Logout</string>
     <string name="title_activity_display_immunizations">Immunizations</string>
     <string name="refresh">Refresh</string>
+    <string name="cancel">Cancel</string>
+	<string name="reauth">Re-Authorize</string>
+
+        
 
     <string-array name="year_array">
         <item>2010</item>
@@ -137,5 +141,6 @@
     <string name="title_activity_appointment_calendar">AppointmentCalendar</string>
     <string name="title_activity_appointment_book">AppointmentBookActivity</string>
     <string name="title_activity_my_messages">MyMessages</string>
+    <string name="title_activity_re_auth">ReAuth</string>
 
 </resources>

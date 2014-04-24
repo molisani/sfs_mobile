@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="left|right"
+    android:orientation="vertical"
+    android:paddingLeft="32dp" >
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/phoneNumberField"
+        android:layout_below="@+id/phoneNumberField"
+        android:layout_marginTop="14dp"
+        android:ems="10"
+        android:hint="@string/Password"
+        android:inputType="textPassword"
+        android:labelFor="@id/editText2" />
+
+    <EditText
+        android:id="@+id/phoneNumberField"
+        android:layout_width="257dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="72dp"
+        android:hint="@string/PennKey"
+        android:inputType="text"
+        android:labelFor="@id/phoneNumberField" />
+
+    <Spinner
+        android:id="@+id/spinneryear"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_below="@+id/editText2"
+        android:layout_marginTop="60dp"
+        android:entries="@array/year_array" />
+
+    <Spinner
+        android:id="@+id/spinnermonth"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/spinneryear"
+        android:layout_toRightOf="@+id/spinneryear"
+        android:entries="@array/month_array" />
+
+    <Spinner
+        android:id="@+id/spinnerday"
+        android:layout_width="66dp"
+        android:layout_height="35dp"
+        android:layout_alignTop="@+id/spinnermonth"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/spinnermonth"
+        android:entries="@array/day_array" />
+
+</RelativeLayout>
