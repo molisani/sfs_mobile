@@ -8,18 +8,21 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".HomeScreen" >
 
+    <ImageView
+        android:id="@+id/penn_logo"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:alpha=".1"
+        android:contentDescription="@string/PennLogo"
+        android:src="@drawable/penn_logo" />
+    
     <TextView
         android:id="@+id/textView1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/shs_main_screen" />
-
-    <ImageView
-        android:id="@+id/penn_logo"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignLeft="@+id/textView1"
-        android:src="@drawable/penn_logo" />
-
+        android:text="@string/shs_main_screen"
+        android:textSize="30sp"
+        android:typeface="sans" />
+    
 </RelativeLayout>
