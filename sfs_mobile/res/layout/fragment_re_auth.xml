@@ -50,8 +50,18 @@
         android:layout_width="66dp"
         android:layout_height="35dp"
         android:layout_alignTop="@+id/spinnermonth"
-        android:layout_marginTop="14dp"
         android:layout_toRightOf="@+id/spinnermonth"
         android:entries="@array/day_array" />
+
+    <TextView
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/phoneNumberField"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:text="@string/reauthtop"
+        android:textSize="20sp" />
 
 </RelativeLayout>

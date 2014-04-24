@@ -23,7 +23,8 @@
     <string name="refresh">Refresh</string>
     <string name="cancel">Cancel</string>
 	<string name="reauth">Re-Authorize</string>
-
+	<string name="reauthtop">You Need to Re-Authorize</string>
+	
         
 
     <string-array name="year_array">

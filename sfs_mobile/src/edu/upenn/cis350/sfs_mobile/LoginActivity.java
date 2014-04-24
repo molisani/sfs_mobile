@@ -36,7 +36,7 @@ public class LoginActivity extends Activity {
         ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
         getActionBar().setTitle("SFS Mobile");  
-		username = (EditText)findViewById(R.id.phoneNumberField);
+		username = (EditText)findViewById(R.id.pennkey);
 		password = (EditText)findViewById(R.id.editText2);
 		//DOB = (EditText)findViewById(R.id.editText3);
 		year = (Spinner)findViewById(R.id.spinneryear);

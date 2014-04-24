@@ -17,8 +17,8 @@
         android:layout_gravity="fill"/>
 
     <EditText
-        android:id="@+id/phoneNumberField"
-        android:labelFor="@id/phoneNumberField"
+        android:id="@+id/pennkey"
+        android:labelFor="@id/pennkey"
         android:inputType="text"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
@@ -35,8 +35,8 @@
         android:labelFor="@id/editText2"
         android:layout_width="257dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/phoneNumberField"
-        android:layout_below="@+id/phoneNumberField"
+        android:layout_alignLeft="@+id/pennkey"
+        android:layout_below="@+id/pennkey"
         android:layout_marginTop="14dp"
         android:ems="10"
         android:inputType="textPassword"

@@ -22,11 +22,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyAppointments extends Activity {
-	private int id = 0;
 	private String username = "";
 	private Bundle extras = null;
 
@@ -42,7 +44,6 @@ public class MyAppointments extends Activity {
 		getActionBar().setTitle("My Appointments");
 		Intent i = getIntent();
 		extras = i.getExtras();
-		id = i.getExtras().getInt("Session_ID");
 		username = i.getExtras().getString("Session_Username");
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
@@ -118,7 +119,8 @@ public class MyAppointments extends Activity {
 		protected JSONObject doInBackground(String... inputs) {
 			ServerPOST post = new ServerPOST("appt.php");
 			post.addField("pennkey", username);
-			post.addField("auth_token", id + "");
+			post.addField("auth_token",
+					getIntent().getExtras().getInt("Session_ID")+ "");
 			post.addField("get_my_appts", "");
 			return post.execute();
 		}
@@ -160,8 +162,23 @@ public class MyAppointments extends Activity {
 		}
 	}
 	
-	public void doPositiveClick() {
-	    // Do stuff here.
+	public void doPositiveClick(Dialog dialog, String user, String pass,
+			Spinner y, Spinner m, Spinner d ) {
+		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
+		int message;
+		post.execute();
+		while (post.getMessage() == 0) {}
+		if ((message = post.getMessage()) != -1) {
+			System.out.println("messages: " + message);
+			extras.remove("Session_ID");
+			extras.putInt("Session_ID", message);
+			dialog.cancel();
+			(new BackgroundTask()).execute();
+		} else {
+			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+			doNegativeClick(dialog);
+		}
+		dialog.cancel();
 	}
 
 	public void doNegativeClick(Dialog dialog) {
