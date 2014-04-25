@@ -39,6 +39,7 @@ public class ServerPOST {
 		HttpClient client = new DefaultHttpClient();
 		HttpPost post = new HttpPost(url);
 		try {
+			
 			post.setEntity(new UrlEncodedFormEntity(query));
 			HttpResponse response = client.execute(post);
 			BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent(), "UTF-8"));

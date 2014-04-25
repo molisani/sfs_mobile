@@ -48,13 +48,11 @@ public class ServerPOSTLogin {
 		url = "https://fling.seas.upenn.edu/~molisani/cgi-bin/auth.php";
 		query = new ArrayList<NameValuePair>();
     	addField("login", "");
-    	System.out.println("username: " + username);
     	addField("pennkey", username);
     	addField("password", password);
 		addField("birthday", String.valueOf(year.getSelectedItem()) + "-" +
 				monthint.get(String.valueOf(month.getSelectedItem())) + "-" +
 				String.valueOf(day.getSelectedItem()));
-    	execute();
 	}
 
 	private void addField(String key, String value) {
@@ -66,6 +64,7 @@ public class ServerPOSTLogin {
 	}
 	
 	public int getMessage() {
+		while (message == 0) {}
 		return message;
 	}
 	
@@ -94,7 +93,6 @@ public class ServerPOSTLogin {
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
-			System.out.println("returning " + jsobj.toString());
 			return null;
 		}
 	}

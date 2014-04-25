@@ -120,7 +120,7 @@ public class MyAppointments extends Activity {
 			ServerPOST post = new ServerPOST("appt.php");
 			post.addField("pennkey", username);
 			post.addField("auth_token",
-					getIntent().getExtras().getInt("Session_ID")+ "");
+					extras.getInt("Session_ID")+ "");
 			post.addField("get_my_appts", "");
 			return post.execute();
 		}
@@ -167,22 +167,18 @@ public class MyAppointments extends Activity {
 		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
 		int message;
 		post.execute();
-		while (post.getMessage() == 0) {}
 		if ((message = post.getMessage()) != -1) {
-			System.out.println("messages: " + message);
 			extras.remove("Session_ID");
 			extras.putInt("Session_ID", message);
-			dialog.cancel();
 			(new BackgroundTask()).execute();
 		} else {
 			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
 			doNegativeClick(dialog);
 		}
-		dialog.cancel();
 	}
 
 	public void doNegativeClick(Dialog dialog) {
-	    dialog.cancel();
+	    dialog.dismiss();
 	    super.onBackPressed();
 	}
 }
