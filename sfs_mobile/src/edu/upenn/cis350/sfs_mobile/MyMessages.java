@@ -9,6 +9,8 @@ import org.json.JSONObject;
 import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
 import android.graphics.Color;
@@ -22,7 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MyMessages extends Activity {
 	private int id = 0;
@@ -109,17 +113,18 @@ public class MyMessages extends Activity {
 		protected JSONObject doInBackground(String... inputs) {
 			ServerPOST post = new ServerPOST("msgs.php");
 			post.addField("pennkey", username);
-			post.addField("auth_token", id + "");
+			post.addField("auth_token", extras.getInt("Session_ID")+ "");
 			post.addField("list", "");
 			return post.execute();
 		}
 		
 		protected void onPostExecute(JSONObject input) {
-			JSONArray arr = null;
-			LinkedList<Message> msgArr = new LinkedList<Message>();
-			try {
-				arr = input.getJSONArray("msgs");
-				for (int i = 0; i < arr.length(); i++) {
+			if (input != null) {
+				JSONArray arr = null;
+				LinkedList<Message> msgArr = new LinkedList<Message>();
+				try {
+					arr = input.getJSONArray("msgs");
+					for (int i = 0; i < arr.length(); i++) {
 						JSONObject curr = (JSONObject) arr.get(i);
 						Message tempMsg = new Message(
 								curr.getString("message_id").toString(),
@@ -130,19 +135,45 @@ public class MyMessages extends Activity {
 								curr.getString("subj").toString(),
 								curr.getInt("read"));
 						msgArr.add(tempMsg);
+					}
+				} catch (JSONException e) {
+					e.printStackTrace();
 				}
-			} catch (JSONException e) {
-				e.printStackTrace();
+
+				String printMsgs = "";
+				String[] content = new String[msgArr.size()];
+				for (int i = 0; i < msgArr.size(); i++) {
+					content[i] = msgArr.get(i).toString();
+				}
+				ListView listView = (ListView) findViewById(R.id.my_msgs_list);
+				ArrayAdapter atlAdapter = new ArrayAdapter(MyMessages.this,
+						android.R.layout.simple_list_item_1, content);
+				listView.setAdapter(atlAdapter);
+			} else {
+				DialogFragment newFragment = ReAuth.newInstance();
+				newFragment.show(getFragmentManager(), "dialog");
 			}
-				
-			String printMsgs = "";
-			String[] content = new String[msgArr.size()];
-			for (int i = 0; i < msgArr.size(); i++) {
-				content[i] = msgArr.get(i).toString();
-			}
-			ListView listView = (ListView) findViewById(R.id.my_msgs_list);
-			ArrayAdapter atlAdapter = new ArrayAdapter(MyMessages.this, android.R.layout.simple_list_item_1 , content);
-			listView.setAdapter(atlAdapter);
 		}
+	}
+	
+	public void doPositiveClick(Dialog dialog, String user, String pass,
+			Spinner y, Spinner m, Spinner d ) {
+		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
+		int message;
+		post.execute();
+		if ((message = post.getMessage()) != -1) {
+			extras.remove("Session_ID");
+			extras.putInt("Session_ID", message);
+			id = message;
+			(new BackgroundTask()).execute();
+		} else {
+			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+			doNegativeClick(dialog);
+		}
+	}
+
+	public void doNegativeClick(Dialog dialog) {
+	    dialog.dismiss();
+	    super.onBackPressed();
 	}
 }

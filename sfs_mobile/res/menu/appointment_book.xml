@@ -1,4 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/home_action"
+          android:title="@string/home_option"
+          android:showAsAction="never" />
     <item android:id="@+id/my_appts_action"
           android:title="@string/my_appts_option"
           android:showAsAction="never" />

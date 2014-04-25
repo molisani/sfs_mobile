@@ -11,10 +11,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -25,6 +28,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 public class AppointmentBookActivity extends Activity implements OnItemClickListener {
@@ -33,6 +37,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 	String username, session_id, date, dept, booking_id;
 	AppointmentBookActivity recentActivity;
 	LinkedList<Appointment> apptArr; // holds the most recent grabbed list of appointments
+	Bundle extras;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_appointment_book);
 		Intent intent = getIntent();
-		Bundle extras = intent.getExtras();
+		extras = intent.getExtras();
 		System.out.println("bk dep: " + extras.getString(AppointmentListActivity.DEPARTMENT));
 		System.out.println("bk date: " + extras.getLong(AppointmentListActivity.DATE));
 		long dateLong = extras.getLong(AppointmentListActivity.DATE);
@@ -70,7 +75,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		protected JSONObject doInBackground(String... params) {
 			ServerPOST post = new ServerPOST("appt.php");
 			post.addField("pennkey", username);
-			post.addField("auth_token", session_id);
+			post.addField("auth_token", extras.getString("Session_ID"));
 			post.addField("get_appts", "");
 			post.addField("date", date);
 			post.addField("department", dept);
@@ -78,6 +83,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		}
 		
 		protected void onPostExecute(JSONObject input) {
+			if (input != null) {
 			JSONArray arr = null;
 			apptArr = new LinkedList<Appointment>();
 			try {
@@ -102,7 +108,11 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 					android.R.layout.simple_list_item_1, apptArr);
 			listView.setAdapter(atlAdapter);
 			listView.setOnItemClickListener(recentActivity);
+		} else {
+			DialogFragment newFragment = ReAuth.newInstance();
+			newFragment.show(getFragmentManager(), "dialog");
 		}
+	}
 	}
 	
 	private String convLongToDate(long dateLong) {
@@ -134,20 +144,25 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		}
 		
 		protected void onPostExecute(JSONObject input) {
-			try {
-				if (input.getBoolean("success")) {
-					Intent i = new Intent(recentActivity, HomeScreen.class);
-					i.putExtra("Session_Username", recentActivity.getIntent().getExtras().getString("Session_Username"));
-					i.putExtra("Session_ID", recentActivity.getIntent().getExtras().getInt("Session_ID"));
-					Toast.makeText(recentActivity, "Booking successful", Toast.LENGTH_SHORT).show();
-					startActivity(i);
-					return;
-				} else {
-					System.out.println("Failed booking");
+			if (input != null) {
+				try {
+					if (input.getBoolean("success")) {
+						Intent i = new Intent(recentActivity, HomeScreen.class);
+						i.putExtra("Session_Username", recentActivity.getIntent().getExtras().getString("Session_Username"));
+						i.putExtra("Session_ID", recentActivity.getIntent().getExtras().getInt("Session_ID"));
+						Toast.makeText(recentActivity, "Booking successful",Toast.LENGTH_SHORT).show();
+						startActivity(i);
+						return;
+					} else {
+						System.out.println("Failed booking");
+					}
+				} catch (JSONException e) {
+					System.out.println("Error: Failed booking.");
+					e.printStackTrace();
 				}
-			} catch (JSONException e) {
-				System.out.println("Error: Failed booking.");
-				e.printStackTrace();
+			} else {
+				DialogFragment newFragment = ReAuth.newInstance();
+				newFragment.show(getFragmentManager(), "dialog");
 			}
 		}
 	}
@@ -166,7 +181,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 	    switch (item.getItemId()) {
 	        case R.id.my_appts_action:
 	        	intent = new Intent(this, MyAppointments.class);
-	        	intent.putExtras(getIntent().getExtras());
+	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
 	        case R.id.immun_actions:
@@ -183,6 +198,27 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 	        default:
 	            return super.onOptionsItemSelected(item);
 	    }
+	}
+	
+	public void doPositiveClick(Dialog dialog, String user, String pass,
+			Spinner y, Spinner m, Spinner d ) {
+		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
+		int message;
+		post.execute();
+		if ((message = post.getMessage()) != -1) {
+			extras.remove("Session_ID");
+			extras.putInt("Session_ID", message);
+			session_id = message + "";
+			(new GrabbingTask()).execute();
+		} else {
+			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+			doNegativeClick(dialog);
+		}
+	}
+
+	public void doNegativeClick(Dialog dialog) {
+	    dialog.dismiss();
+	    super.onBackPressed();
 	}
 
 }

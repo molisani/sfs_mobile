@@ -20,7 +20,9 @@ import android.widget.Spinner;
 import android.os.Build;
 
 public class ReAuth extends DialogFragment {
-
+	String messages = "edu.upenn.cis350.sfs_mobile.MyMessages";
+	String appts = "edu.upenn.cis350.sfs_mobile.MyAppointments";
+	String book = "edu.upenn.cis350.sfs_mobile.AppointmentBookActivity";
 	public static ReAuth newInstance() {
         ReAuth frag = new ReAuth();
         Bundle args = new Bundle();
@@ -39,22 +41,56 @@ public class ReAuth extends DialogFragment {
 	    final View view = inflater.inflate(R.layout.fragment_re_auth, null);
 	    builder.setView(view);
 	    // Add action buttons
+	    Activity activity = getActivity();
+	    if (getActivity().getClass().getName().equals(messages)) {
+	    	activity = (MyMessages) activity;
+	    } else if (getActivity().getClass().getName().equals(appts)) {
+	    	activity = (MyAppointments) activity;
+	    } else if (getActivity().getClass().getName().equals(book)) {
+	    	activity = (AppointmentBookActivity) activity;
+	    }
 	    builder.setView(view)
 	           .setPositiveButton(R.string.reauth, new DialogInterface.OnClickListener() {
 	               @Override
-	               public void onClick(DialogInterface dialog, int id) {
-	            	   ((MyAppointments) getActivity()).doPositiveClick(
-	            			ReAuth.this.getDialog(),
-	            			((EditText)view.findViewById(R.id.phoneNumberField)).getText().toString(),
-	            			((EditText)view.findViewById(R.id.editText2)).getText().toString(),
-	            	   		(Spinner) view.findViewById(R.id.spinneryear),
-	   	   					(Spinner) view.findViewById(R.id.spinnermonth),
-		   					(Spinner) view.findViewById(R.id.spinnerday));
+					public void onClick(DialogInterface dialog, int id) {
+						Activity activity = getActivity();
+						if (getActivity().getClass().getName().equals(messages)) {
+							((MyMessages) activity).doPositiveClick(
+			            			ReAuth.this.getDialog(),
+			            			((EditText)view.findViewById(R.id.phoneNumberField)).getText().toString(),
+			            			((EditText)view.findViewById(R.id.editText2)).getText().toString(),
+			            	   		(Spinner) view.findViewById(R.id.spinneryear),
+			   	   					(Spinner) view.findViewById(R.id.spinnermonth),
+				   					(Spinner) view.findViewById(R.id.spinnerday));
+						} else if (getActivity().getClass().getName().equals(appts)) {
+							((MyAppointments)activity).doPositiveClick(
+			            			ReAuth.this.getDialog(),
+			            			((EditText)view.findViewById(R.id.phoneNumberField)).getText().toString(),
+			            			((EditText)view.findViewById(R.id.editText2)).getText().toString(),
+			            	   		(Spinner) view.findViewById(R.id.spinneryear),
+			   	   					(Spinner) view.findViewById(R.id.spinnermonth),
+				   					(Spinner) view.findViewById(R.id.spinnerday));
+						} else if (getActivity().getClass().getName().equals(book)) {
+							((AppointmentBookActivity)activity).doPositiveClick(
+			            			ReAuth.this.getDialog(),
+			            			((EditText)view.findViewById(R.id.phoneNumberField)).getText().toString(),
+			            			((EditText)view.findViewById(R.id.editText2)).getText().toString(),
+			            	   		(Spinner) view.findViewById(R.id.spinneryear),
+			   	   					(Spinner) view.findViewById(R.id.spinnermonth),
+				   					(Spinner) view.findViewById(R.id.spinnerday));
+						}
 	               }
 	           })
 	           .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
 	               public void onClick(DialogInterface dialog, int id) {
-	            	   ((MyAppointments) getActivity()).doNegativeClick(ReAuth.this.getDialog());
+	            	   Activity activity = getActivity();
+						if (getActivity().getClass().getName().equals(messages)) {
+							((MyMessages) activity).doNegativeClick(ReAuth.this.getDialog());
+						} else if (getActivity().getClass().getName().equals(appts)) {
+							((MyAppointments)activity).doNegativeClick(ReAuth.this.getDialog());
+						} else if (getActivity().getClass().getName().equals(book)) {
+							((AppointmentBookActivity)activity).doNegativeClick(ReAuth.this.getDialog());
+						}
 	               }
 	           });
 	    return builder.create();  
