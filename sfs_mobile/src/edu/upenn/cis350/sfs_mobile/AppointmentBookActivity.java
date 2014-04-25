@@ -75,7 +75,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		protected JSONObject doInBackground(String... params) {
 			ServerPOST post = new ServerPOST("appt.php");
 			post.addField("pennkey", username);
-			post.addField("auth_token", extras.getString("Session_ID"));
+			post.addField("auth_token", session_id);
 			post.addField("get_appts", "");
 			post.addField("date", date);
 			post.addField("department", dept);
