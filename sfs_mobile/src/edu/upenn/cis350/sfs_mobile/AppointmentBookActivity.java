@@ -208,6 +208,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		if ((message = post.getMessage()) != -1) {
 			extras.remove("Session_ID");
 			extras.putInt("Session_ID", message);
+			recentActivity.getIntent().getExtras().putInt("Session_ID", message);
 			session_id = message + "";
 			(new GrabbingTask()).execute();
 		} else {
