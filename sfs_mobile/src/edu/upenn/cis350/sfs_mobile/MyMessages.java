@@ -76,8 +76,6 @@ public class MyMessages extends Activity {
 	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
-	        case R.id.immun_actions:
-	            return true;
 	        case R.id.messages_action:
 	            return true;
 	        case R.id.logout:

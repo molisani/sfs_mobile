@@ -84,9 +84,10 @@ public class AppointmentMessageActivity extends Activity {
 	        	intent.putExtras(getIntent().getExtras());
 	        	startActivity(intent);
 	            return true;
-	        case R.id.immun_actions:
-	            return true;
 	        case R.id.messages_action:
+	        	intent = new Intent(this, MyMessages.class);
+	        	intent.putExtras(getIntent().getExtras());
+	        	startActivity(intent);
 	            return true;
 	        case R.id.logout:
 	        	Bundle b = getIntent().getExtras();
