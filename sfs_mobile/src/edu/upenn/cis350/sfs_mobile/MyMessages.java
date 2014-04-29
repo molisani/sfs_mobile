@@ -165,9 +165,10 @@ public class MyMessages extends Activity {
 	}
 	
 	public void openMsg(int id, int apt) {
-		Intent intent=new Intent(this,MessageDetail.class);
-	    intent.putExtra("id", id);
-	    intent.putExtra("apt", apt);
+		Intent intent=new Intent(this, MessageDetail.class);
+		extras.putInt("id", id);
+		extras.putInt("apt", apt);
+	    intent.putExtras(extras);
 	    startActivity(intent);
 	}
 	

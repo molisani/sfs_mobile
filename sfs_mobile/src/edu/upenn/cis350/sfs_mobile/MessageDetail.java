@@ -10,6 +10,7 @@ import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
 import edu.upenn.cis350.sfs_mobile.MyAppointments.PlaceholderFragment;
 import android.app.Activity;
 import android.app.ActionBar;
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
@@ -25,6 +26,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
 import android.os.Build;
@@ -52,6 +55,7 @@ public class MessageDetail extends Activity {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
+		(new BackgroundTask()).execute();
 	}
 
 	@Override
@@ -113,12 +117,12 @@ public class MessageDetail extends Activity {
 
 	class BackgroundTask extends AsyncTask<String, Void, JSONObject> {
 		protected JSONObject doInBackground(String... inputs) {
-			ServerPOST post = new ServerPOST("msgs.php");
-			post.addField("pennkey", username);
-			post.addField("auth_token", extras.getInt("Session_ID")+ "");
-			post.addField("read", "");
-			post.addField("message_id", id+"");
-			return post.execute();
+			ServerPOST postMsg = new ServerPOST("msgs.php");
+			postMsg.addField("pennkey", username);
+			postMsg.addField("auth_token", extras.getInt("Session_ID")+ "");
+			postMsg.addField("read", "");
+			postMsg.addField("message_id", id+"");
+			return postMsg.execute();
 		}
 		
 		protected void onPostExecute(JSONObject input) {
@@ -137,6 +141,27 @@ public class MessageDetail extends Activity {
 				newFragment.show(getFragmentManager(), "dialog");
 			}
 		}
+	}
+	
+	public void doPositiveClick(Dialog dialog, String user, String pass,
+			Spinner y, Spinner m, Spinner d ) {
+		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
+		int message;
+		post.execute();
+		if ((message = post.getMessage()) != -1) {
+			extras.remove("Session_ID");
+			extras.putInt("Session_ID", message);
+			id = message;
+			(new BackgroundTask()).execute();
+		} else {
+			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+			doNegativeClick(dialog);
+		}
+	}
+
+	public void doNegativeClick(Dialog dialog) {
+	    dialog.dismiss();
+	    super.onBackPressed();
 	}
 
 }
