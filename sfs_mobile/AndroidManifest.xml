@@ -69,6 +69,10 @@
             android:name="edu.upenn.cis350.sfs_mobile.ReAuth"
             android:label="@string/title_activity_re_auth" >
         </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.MessageDetail"
+            android:label="@string/title_activity_message_detail" >
+        </activity>
     </application>
 
 </manifest>

@@ -13,6 +13,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -22,11 +23,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class MyMessages extends Activity {
 	private int id = 0;
@@ -119,7 +122,7 @@ public class MyMessages extends Activity {
 		protected void onPostExecute(JSONObject input) {
 			if (input != null) {
 				JSONArray arr = null;
-				LinkedList<Message> msgArr = new LinkedList<Message>();
+				final LinkedList<Message> msgArr = new LinkedList<Message>();
 				try {
 					arr = input.getJSONArray("msgs");
 					for (int i = 0; i < arr.length(); i++) {
@@ -143,15 +146,29 @@ public class MyMessages extends Activity {
 				for (int i = 0; i < msgArr.size(); i++) {
 					content[i] = msgArr.get(i).toString();
 				}
-				ListView listView = (ListView) findViewById(R.id.my_msgs_list);
+				final ListView listView = (ListView) findViewById(R.id.my_msgs_list);
 				ArrayAdapter atlAdapter = new ArrayAdapter(MyMessages.this,
 						android.R.layout.simple_list_item_1, content);
 				listView.setAdapter(atlAdapter);
+				
+				listView.setClickable(true);
+				listView.setOnItemClickListener(new OnItemClickListener() {					
+					public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
+					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt());				         
+					}
+				});
 			} else {
 				DialogFragment newFragment = ReAuth.newInstance();
 				newFragment.show(getFragmentManager(), "dialog");
 			}
 		}
+	}
+	
+	public void openMsg(int id, int apt) {
+		Intent intent=new Intent(this,MessageDetail.class);
+	    intent.putExtra("id", id);
+	    intent.putExtra("apt", apt);
+	    startActivity(intent);
 	}
 	
 	public void doPositiveClick(Dialog dialog, String user, String pass,
