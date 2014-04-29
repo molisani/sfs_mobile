@@ -151,7 +151,7 @@ public class MessageDetail extends Activity {
 		if ((message = post.getMessage()) != -1) {
 			extras.remove("Session_ID");
 			extras.putInt("Session_ID", message);
-			id = message;
+			getIntent().getExtras().putInt("Session_ID", message);
 			(new BackgroundTask()).execute();
 		} else {
 			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
