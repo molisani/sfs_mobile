@@ -154,7 +154,8 @@ public class MyMessages extends Activity {
 				listView.setClickable(true);
 				listView.setOnItemClickListener(new OnItemClickListener() {					
 					public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt());				         
+						System.out.println("position: " + position);
+					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt());	
 					}
 				});
 			} else {
