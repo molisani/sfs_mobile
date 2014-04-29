@@ -50,7 +50,7 @@ public class MessageDetail extends Activity {
 		extras = i.getExtras();
 		id = i.getExtras().getInt("id");
 		apt = i.getExtras().getInt("apt");
-		username = i.getExtras().getString("username");
+		username = i.getExtras().getString("Session_Username");
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
