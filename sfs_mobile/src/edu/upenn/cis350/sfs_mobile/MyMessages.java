@@ -6,14 +6,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
-import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -27,7 +25,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -141,7 +138,6 @@ public class MyMessages extends Activity {
 					e.printStackTrace();
 				}
 
-				String printMsgs = "";
 				String[] content = new String[msgArr.size()];
 				for (int i = 0; i < msgArr.size(); i++) {
 					content[i] = msgArr.get(i).toString();
@@ -154,7 +150,7 @@ public class MyMessages extends Activity {
 				listView.setClickable(true);
 				listView.setOnItemClickListener(new OnItemClickListener() {					
 					public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt());				         
+					     openMsg(msgArr.get(position-1).getId(), msgArr.get(position-1).getApt());				         
 					}
 				});
 			} else {
@@ -164,10 +160,10 @@ public class MyMessages extends Activity {
 		}
 	}
 	
-	public void openMsg(int id, int apt) {
+	public void openMsg(int msgId, int aptId) {
 		Intent intent=new Intent(this, MessageDetail.class);
-		extras.putInt("id", id);
-		extras.putInt("apt", apt);
+		extras.putInt("id", msgId);
+		extras.putInt("apt", aptId);
 	    intent.putExtras(extras);
 	    startActivity(intent);
 	}
@@ -180,7 +176,6 @@ public class MyMessages extends Activity {
 		if ((message = post.getMessage()) != -1) {
 			extras.remove("Session_ID");
 			extras.putInt("Session_ID", message);
-			id = message;
 			(new BackgroundTask()).execute();
 		} else {
 			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
