@@ -92,13 +92,21 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 				arr = input.getJSONArray("appts");
 				for (int i = 0; i < arr.length(); i++) {
 						JSONObject curr = (JSONObject) arr.get(i);
-						Appointment tempAppt = new Appointment(
-								null,
+						System.out.println("apptbook " + curr);
+						String immun = curr.has("immunization") ? curr.getString("immunization").toString() : null;
+						String subtype = curr.has("subtype") ? curr.getString("subtype").toString() : null;
+						String callback = curr.has("callback") ? curr.getString("callback").toString() : null;
+						String reason = curr.has("reason") ? curr.getString("reason").toString() : null;
+						Appointment tempAppt = new Appointment( 
+								immun, // TODO test
 								curr.getString("duration").toString(),
 								new Timestamp(curr.getString("appt_time").toString()),
 								curr.getString("appointment_id").toString(),
 								dept,
-								null);
+								subtype,
+								callback,
+								reason
+								);
 						apptArr.add(tempAppt);
 				}
 			} catch (JSONException e) {

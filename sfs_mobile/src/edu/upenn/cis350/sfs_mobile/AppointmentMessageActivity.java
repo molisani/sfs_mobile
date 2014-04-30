@@ -16,6 +16,7 @@ public class AppointmentMessageActivity extends Activity {
 	TextView topTextView, middleTextView, bottomTextView;
 	String lastScreen, valueClicked;
 	
+	// NOTE: primaryCare and sportsMedicine messages no longer in use; app allows scheduling
 	String[] primaryCareMessages = {
 			"If you have a serious injury, call 215-746-3535 to speak with a Nurse.",
 			"All appointments in Primary Care are made by phone to ensure adequate patient care.",
@@ -59,7 +60,7 @@ public class AppointmentMessageActivity extends Activity {
 		} else {
 			System.out.println("Error 300: Could not determine next activity.");
 		}
-		topTextView = (TextView) findViewById(R.id.textView1);
+		topTextView = (TextView) findViewById(R.id.messageView);
 		topTextView.setText(content[0]);
 		middleTextView = (TextView) findViewById(R.id.textView2);
 		middleTextView.setText(content[1]);

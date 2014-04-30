@@ -17,7 +17,7 @@
         android:src="@drawable/penn_logo" />
     
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/messageView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"

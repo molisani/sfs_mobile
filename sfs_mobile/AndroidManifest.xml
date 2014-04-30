@@ -73,6 +73,10 @@
             android:name="edu.upenn.cis350.sfs_mobile.MessageDetail"
             android:label="@string/title_activity_message_detail" >
         </activity>
+        <activity
+            android:name="edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity"
+            android:label="@string/title_activity_appointment_confirm" >
+        </activity>
     </application>
 
 </manifest>

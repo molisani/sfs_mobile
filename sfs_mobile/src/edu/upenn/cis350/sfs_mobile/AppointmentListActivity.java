@@ -161,7 +161,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 			} else if ( // TODO reroute this
 					itemText.equals(appointmentTypes[2]) || // primary care
 					itemText.equals(appointmentTypes[3])) {	// sports medicine
-				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class);
+				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class);
 				intent.putExtras(this.getIntent().getExtras());
 				if (itemText.equals(appointmentTypes[2]))
 					intent.putExtra(AppointmentListActivity.DEPARTMENT, "p");

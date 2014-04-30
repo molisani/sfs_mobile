@@ -45,7 +45,7 @@ public class AppointmentTextInputActivity extends Activity {
 			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
 			*/
 		
-		messageView = (TextView) findViewById(R.id.textView1);
+		messageView = (TextView) findViewById(R.id.messageView);
 		String content;
 		if (intent.getStringExtra(AppointmentListActivity.NEXT_SCREEN).equals("callback")) {
 			content = callbackMessage; 

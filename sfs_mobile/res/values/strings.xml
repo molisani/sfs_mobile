@@ -142,5 +142,6 @@
     <string name="title_activity_my_messages">MyMessages</string>
     <string name="title_activity_re_auth">ReAuth</string>
     <string name="title_activity_message_detail">MessageDetail</string>
+    <string name="title_activity_appointment_confirm">AppointmentConfirmActivity</string>
 
 </resources>
