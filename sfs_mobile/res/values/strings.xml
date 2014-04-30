@@ -7,7 +7,7 @@
     <string name="title_activity_home_screen">HomeScreen</string>
     <string name="my_appts_option">My Appointments</string>
     <string name="make_appts_option">Make an Appointment</string>
-    <string name="messages_option">Messages</string>
+    <string name="messages_option">My Messages</string>
     <string name="immun_option">Immunizations</string>
     <string name="home_option">Home</string>
     <string name="shs_main_screen">UPenn SHS</string>
@@ -22,10 +22,8 @@
     <string name="title_activity_display_immunizations">Immunizations</string>
     <string name="refresh">Refresh</string>
     <string name="cancel">Cancel</string>
-	<string name="reauth">Re-Authorize</string>
-	<string name="reauthtop">You Need to Re-Authorize</string>
-	
-        
+    <string name="reauth">Re-Authorize</string>
+    <string name="reauthtop">You Need to Re-Authorize</string>
 
     <string-array name="year_array">
         <item>2010</item>
@@ -143,5 +141,6 @@
     <string name="title_activity_appointment_book">AppointmentBookActivity</string>
     <string name="title_activity_my_messages">MyMessages</string>
     <string name="title_activity_re_auth">ReAuth</string>
+    <string name="title_activity_message_detail">MessageDetail</string>
 
 </resources>

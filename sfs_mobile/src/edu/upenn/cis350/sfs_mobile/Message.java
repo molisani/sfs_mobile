@@ -20,6 +20,10 @@ public class Message {
 		return msgId;
 	}
 	
+	public int getApt() {
+		return apptID;
+	}
+	
 	@Override
 	public String toString() {
 		String s = "";

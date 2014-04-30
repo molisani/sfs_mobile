@@ -188,9 +188,10 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
-	        case R.id.immun_actions:
-	            return true;
 	        case R.id.messages_action:
+	        	intent = new Intent(this, MyMessages.class);
+	        	intent.putExtras(extras);
+	        	startActivity(intent);
 	            return true;
 	        case R.id.logout:
 	        	Bundle b = getIntent().getExtras();
@@ -212,6 +213,7 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		if ((message = post.getMessage()) != -1) {
 			extras.remove("Session_ID");
 			extras.putInt("Session_ID", message);
+			recentActivity.getIntent().getExtras().putInt("Session_ID", message);
 			session_id = message + "";
 			(new GrabbingTask()).execute();
 		} else {

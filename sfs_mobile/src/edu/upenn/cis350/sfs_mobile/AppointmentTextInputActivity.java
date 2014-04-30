@@ -119,10 +119,10 @@ public class AppointmentTextInputActivity extends Activity {
 	        	intent.putExtras(getIntent().getExtras());
 	        	startActivity(intent);
 	            return true;
-	        case R.id.immun_actions:
-	            return true;
 	        case R.id.messages_action:
-	            return true;
+	        	intent = new Intent(this, MyMessages.class);
+	        	intent.putExtras(getIntent().getExtras());
+	        	startActivity(intent);
 	        case R.id.logout:
 	        	Bundle b = getIntent().getExtras();
 	        	ServerPOSTLogout logout = new ServerPOSTLogout("auth.php",
