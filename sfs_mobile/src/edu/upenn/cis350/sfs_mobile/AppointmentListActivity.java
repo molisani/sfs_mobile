@@ -28,6 +28,8 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 	static final String NEXT_SCREEN = "edu.upenn.cis350.sfs_mobile.NEXT_SCREEN"; // key for code indicating what screen should come next
 	static final String DEPARTMENT = "edu.upenn.cis350.sfs_mobile.DEPARTMENT"; // key for holding what department we'll be querying for an appt
 	static final String DATE = "edu.upenn.cis350.sfs_mobile.DATE"; // key for potential booking date
+	static final String CALLBACK = "edu.upenn.cis350.sfs_mobile.CALLBACK"; // key for callback number
+	static final String REASON = "edu.upenn.cis350.sfs_mobile.REASON"; // key for auxiliary reason field
 	
 	ListView listView;
 	
@@ -155,7 +157,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 					intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
 				else if (itemText.equals(appointmentTypes[4]))
 					intent.putExtra(AppointmentListActivity.DEPARTMENT, "w");
-			} else if (
+			} else if ( // TODO reroute this
 					itemText.equals(appointmentTypes[2]) || // primary care
 					itemText.equals(appointmentTypes[3])) {	// sports medicine
 				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class);

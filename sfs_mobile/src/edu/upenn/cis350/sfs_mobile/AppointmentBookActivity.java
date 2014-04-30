@@ -34,7 +34,7 @@ import android.widget.Toast;
 public class AppointmentBookActivity extends Activity implements OnItemClickListener {
 	
 	ListView listView;
-	String username, session_id, date, dept, booking_id;
+	String username, session_id, date, dept, booking_id, callback, reason;
 	AppointmentBookActivity recentActivity;
 	LinkedList<Appointment> apptArr; // holds the most recent grabbed list of appointments
 	Bundle extras;
@@ -59,6 +59,8 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		username = extras.getString("Session_Username");
 		session_id = extras.getInt("Session_ID") + "";
 		dept = extras.getString(AppointmentListActivity.DEPARTMENT);
+		callback = extras.getString(AppointmentListActivity.CALLBACK);
+		reason = extras.getString(AppointmentListActivity.REASON);
 		
 		// convert content to string array
 		/*ArrayList<BasicNameValuePair> content = null; // set content (need to grab from php)
@@ -140,6 +142,8 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 			post.addField("patient", username);
 			post.addField("subtype", "");
 			post.addField("immunization", "");
+			post.addField("callback_num", "0000000000");
+			post.addField("reason", "");
 			return post.execute();
 		}
 		
