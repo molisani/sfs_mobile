@@ -74,8 +74,13 @@
             android:label="@string/title_activity_message_detail" >
         </activity>
         <activity
+<<<<<<< HEAD
             android:name="edu.upenn.cis350.sfs_mobile.MessageReply"
             android:label="@string/title_activity_message_reply" >
+=======
+            android:name="edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity"
+            android:label="@string/title_activity_appointment_confirm" >
+>>>>>>> 0fe06c784dbe0b63428d51dbf1cd479be5bdf235
         </activity>
     </application>
 

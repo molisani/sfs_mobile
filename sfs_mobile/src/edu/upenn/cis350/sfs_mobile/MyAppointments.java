@@ -134,13 +134,16 @@ public class MyAppointments extends Activity {
 					arr = input.getJSONArray("appts");
 					for (int i = 0; i < arr.length(); i++) {
 						JSONObject curr = (JSONObject) arr.get(i);
+						System.out.println("appt " + curr);
 						Appointment tempAppt = new Appointment(curr.getString(
 								"immunization").toString(), curr.getString(
 								"duration").toString(), new Timestamp(curr
 								.getString("appt_time").toString()), curr
 								.getString("appointment_id").toString(), curr
 								.getString("department").toString(), curr
-								.getString("subtype").toString());
+								.getString("subtype").toString(), //curr
+								"",//.getString("callback").toString(), curr
+								"");//.getString("reason"));
 						apptArr.add(tempAppt);
 					}
 				} catch (JSONException e) {

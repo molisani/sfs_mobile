@@ -11,7 +11,7 @@
     tools:context=".AppointmentBookActivity" >
 
     <TextView
-        android:id="@+id/textView1"
+        android:id="@+id/messageView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Choose an available date to book your appointment, or click back. " />

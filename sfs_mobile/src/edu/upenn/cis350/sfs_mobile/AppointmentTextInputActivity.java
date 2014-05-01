@@ -45,7 +45,7 @@ public class AppointmentTextInputActivity extends Activity {
 			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
 			*/
 		
-		messageView = (TextView) findViewById(R.id.textView1);
+		messageView = (TextView) findViewById(R.id.messageView);
 		String content;
 		if (intent.getStringExtra(AppointmentListActivity.NEXT_SCREEN).equals("callback")) {
 			content = callbackMessage; 
@@ -87,9 +87,11 @@ public class AppointmentTextInputActivity extends Activity {
 				intent = new Intent(context, AppointmentTextInputActivity.class);
 				intent.putExtras(extras);
 				intent.putExtra(AppointmentListActivity.NEXT_SCREEN, "callback");
+				intent.putExtra(AppointmentListActivity.REASON, editField.getText().toString());
 			} else if (currentStatus.equals(callbackMessage)) {
 				intent = new Intent(context, AppointmentCalendarActivity.class);
 				intent.putExtras(extras);
+				intent.putExtra(AppointmentListActivity.CALLBACK, editField.getText().toString());
 			} else {
 				System.out.println("Error 81: Can't determine next activity.");
 				return;
