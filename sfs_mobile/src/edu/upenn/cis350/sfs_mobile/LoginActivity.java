@@ -80,7 +80,7 @@ public class LoginActivity extends Activity {
 					i.putExtra("Session_Username", username.getText().toString());
 					startActivityForResult(i, 1);
 				} else {
-					Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
+					Toast.makeText(getApplicationContext(), "Invalid Credentials", Toast.LENGTH_SHORT).show();
 				}
 			} catch (JSONException e) {
 				

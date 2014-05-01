@@ -1,6 +1,6 @@
 package edu.upenn.cis350.sfs_mobile;
 
-public class Message {
+public class Message implements Comparable {
 	int msgId, apptID;
 	Timestamp cal;
 	String pennkey, name, subj;
@@ -24,6 +24,14 @@ public class Message {
 		return apptID;
 	}
 	
+	public String getSubj() {
+		return subj;
+	}
+	
+	public String getSender() {
+		return pennkey;
+	}
+	
 	@Override
 	public String toString() {
 		String s = "";
@@ -31,6 +39,17 @@ public class Message {
 		s += "\n";
 		s += "Subject: " + subj;
 		s += "\n";
+		s += "Sent By: " + name;
 		return s;
+	}
+
+	@Override
+	public int compareTo(Object m) {
+		if (cal.totalTime() > ((Message)m).cal.totalTime())
+            return -1;
+        else if (cal.totalTime() < ((Message)m).cal.totalTime())
+            return 1;
+        else
+            return 0;
 	}	
 }

@@ -1,16 +1,11 @@
 package edu.upenn.cis350.sfs_mobile;
 
-import java.util.LinkedList;
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
-import edu.upenn.cis350.sfs_mobile.MyAppointments.PlaceholderFragment;
+import edu.upenn.cis350.sfs_mobile.MessageDetail.PlaceholderFragment;
 import android.app.Activity;
 import android.app.ActionBar;
-import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.content.Intent;
@@ -23,47 +18,47 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Spinner;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.os.Build;
 
-public class MessageDetail extends Activity {
+public class MessageReply extends Activity {
 	private int id, apt;
 	private String username = "";
+	private String subj = "";
+	private String sender = "";
 	private Bundle extras = null;
+	private MessageReply curr;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_message_detail);
+		curr = this;
+		setContentView(R.layout.activity_message_reply);
 		ActionBar ab = getActionBar();
 		ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
 		getActionBar().setTitle("SFS Mobile");
 		ab.setBackgroundDrawable(colorDrawable);
-		getActionBar().setTitle("Message");
+		getActionBar().setTitle("Reply");
 		Intent i = getIntent();
 		extras = i.getExtras();
 		id = i.getExtras().getInt("id");
 		apt = i.getExtras().getInt("apt");
 		username = i.getExtras().getString("Session_Username");
+		subj = i.getExtras().getString("subj");
+		sender = i.getExtras().getString("sender");
 		if (savedInstanceState == null) {
 			getFragmentManager().beginTransaction()
 					.add(R.id.container, new PlaceholderFragment()).commit();
 		}
-		(new BackgroundTask1()).execute();
-		(new BackgroundTask2()).execute();
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.message_detail, menu);
+		getMenuInflater().inflate(R.menu.message_reply, menu);
 		return true;
 	}
 
@@ -98,10 +93,8 @@ public class MessageDetail extends Activity {
 	    }
 	}
 	
-	public void reply(View v) {
-		Intent intent = new Intent(this, MessageReply.class);
-		intent.putExtras(extras);
-		startActivity(intent);
+	public void submit(View v) {
+		(new BackgroundTask()).execute();
 	}
 
 	/**
@@ -115,102 +108,51 @@ public class MessageDetail extends Activity {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container,
 				Bundle savedInstanceState) {
-			View rootView = inflater.inflate(R.layout.fragment_message_detail,
+			View rootView = inflater.inflate(R.layout.fragment_message_reply,
 					container, false);
 			return rootView;
 		}
 	}
 	
+	class BackgroundTask extends AsyncTask<String, Void, JSONObject> {
 
-	class BackgroundTask1 extends AsyncTask<String, Void, JSONObject> {
-		protected JSONObject doInBackground(String... inputs) {
+		@Override
+		protected JSONObject doInBackground(String... params) {
 			ServerPOST postMsg = new ServerPOST("msgs.php");
 			postMsg.addField("pennkey", username);
 			postMsg.addField("auth_token", extras.getInt("Session_ID")+ "");
-			postMsg.addField("read", "");
-			postMsg.addField("message_id", id+"");
+			postMsg.addField("send", "");
+			postMsg.addField("appointment_id", apt+"");
+			postMsg.addField("recipient", sender);
+			postMsg.addField("subj", subj);
+			EditText replyField = (EditText)findViewById(R.id.reply_body);
+			String replyText = replyField.getText().toString();
+			System.out.println("reply value: "+replyText);
+			postMsg.addField("body", replyText);
 			return postMsg.execute();
 		}
 		
 		protected void onPostExecute(JSONObject input) {
 			if (input != null) {
-				String body = "";
 				try {
-					body = input.getString("body").toString();
-				} catch (JSONException e) {
-					e.printStackTrace();
-				}
-				
-				TextView tv = (TextView)findViewById(R.id.msg_body);
-				tv.setText(body);
-			} else {
-				DialogFragment newFragment = ReAuth.newInstance();
-				newFragment.show(getFragmentManager(), "dialog");
-			}
-		}
-	}
-	
-	class BackgroundTask2 extends AsyncTask<String, Void, JSONObject> {
-		protected JSONObject doInBackground(String... inputs) {
-			ServerPOST post = new ServerPOST("appt.php");
-			post.addField("pennkey", username);
-			post.addField("auth_token",
-					extras.getInt("Session_ID")+ "");
-			post.addField("get_my_appts", "");
-			return post.execute();
-		}
-		
-		protected void onPostExecute(JSONObject input) {
-			if (input != null) {
-				JSONArray arr = null;
-				String relatedApt = "";
-				try {
-					arr = input.getJSONArray("appts");
-					for (int i = 0; i < arr.length(); i++) {
-						JSONObject curr = (JSONObject) arr.get(i);
-						if (Integer.parseInt(curr.getString("appointment_id").toString()) == apt) {
-							Appointment tempAppt = new Appointment(curr.getString(
-									"immunization").toString(), curr.getString(
-									"duration").toString(), new Timestamp(curr
-									.getString("appt_time").toString()), curr
-									.getString("appointment_id").toString(), curr
-									.getString("department").toString(), curr
-									.getString("subtype").toString());
-							relatedApt = tempAppt.toString();
-						}
+					if (input.getBoolean("success")) {
+						Intent i = new Intent(curr, MyMessages.class);
+				    	i.putExtras(extras);
+						Toast.makeText(curr, "Message Sent",Toast.LENGTH_SHORT).show();
+						startActivity(i);
+						return;
+					} else {
+						Toast.makeText(curr, input.getString("message").toString(), Toast.LENGTH_LONG).show();
+						//System.out.println("Failed to send message");
 					}
 				} catch (JSONException e) {
+					System.out.println("Error: Failed to send message.");
 					e.printStackTrace();
 				}
-				TextView tv = (TextView)findViewById(R.id.msg_apt);
-				tv.setText(relatedApt);
 			} else {
 				DialogFragment newFragment = ReAuth.newInstance();
 				newFragment.show(getFragmentManager(), "dialog");
 			}
 		}
 	}
-	
-	public void doPositiveClick(Dialog dialog, String user, String pass,
-			Spinner y, Spinner m, Spinner d ) {
-		ServerPOSTLogin post = new ServerPOSTLogin(user, pass, y, m, d);
-		int message;
-		post.execute();
-		if ((message = post.getMessage()) != -1) {
-			extras.remove("Session_ID");
-			extras.putInt("Session_ID", message);
-			getIntent().getExtras().putInt("Session_ID", message);
-			(new BackgroundTask1()).execute();
-			(new BackgroundTask2()).execute();
-		} else {
-			Toast.makeText(getApplicationContext(), "Login Failed", Toast.LENGTH_SHORT).show();
-			doNegativeClick(dialog);
-		}
-	}
-
-	public void doNegativeClick(Dialog dialog) {
-	    dialog.dismiss();
-	    super.onBackPressed();
-	}
-
 }
