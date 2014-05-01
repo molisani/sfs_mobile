@@ -175,7 +175,9 @@ public class MessageDetail extends Activity {
 									.getString("appt_time").toString()), curr
 									.getString("appointment_id").toString(), curr
 									.getString("department").toString(), curr
-									.getString("subtype").toString());
+									.getString("subtype").toString(), //curr
+									"",//.getString("callback").toString(), curr
+									"");//.getString("reason"));
 							relatedApt = tempAppt.toString();
 						}
 					}

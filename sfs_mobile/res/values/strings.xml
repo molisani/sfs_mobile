@@ -142,10 +142,7 @@
     <string name="title_activity_my_messages">MyMessages</string>
     <string name="title_activity_re_auth">ReAuth</string>
     <string name="title_activity_message_detail">MessageDetail</string>
-<<<<<<< HEAD
     <string name="title_activity_message_reply">MessageReply</string>
-=======
-    <string name="title_activity_appointment_confirm">AppointmentConfirmActivity</string>
->>>>>>> 0fe06c784dbe0b63428d51dbf1cd479be5bdf235
+    <string name="title_activity_appointment_confirm">AppointmentConfirmActivity</string>\
 
 </resources>
