@@ -82,7 +82,10 @@ public class MyMessages extends Activity {
 	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
-	        case R.id.messages_action:
+	        case R.id.my_appts_action:
+	        	intent = new Intent(this, MyAppointments.class);
+	        	intent.putExtras(getIntent().getExtras());
+	        	startActivity(intent);
 	            return true;
 	        case R.id.logout:
 	        	Bundle b = getIntent().getExtras();
