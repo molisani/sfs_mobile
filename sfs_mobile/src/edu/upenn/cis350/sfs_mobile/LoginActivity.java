@@ -71,12 +71,12 @@ public class LoginActivity extends Activity {
 			JSONObject json = post.execute();
 			try {
 				if (json.getBoolean("success")) {
-					GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
-					String registration_id = gcm.register(639566165629);
+					//GoogleCloudMessaging gcm = GoogleCloudMessaging.getInstance(getApplicationContext());
+					//String registration_id = gcm.register(639566165629);
 					ServerPOST regPost = new ServerPOST("auth.php", "register", "");
 					regPost.addField("pennkey", username.getText().toString());
-					regPost.addField("auth_token", json.getInt("message"));
-					regPost.addField("registration_id", registration_id);
+					regPost.addField("auth_token", String.valueOf(json.getInt("message")));
+					//regPost.addField("registration_id", registration_id);
 					regPost.execute();
 				}
 			} catch (JSONException e) {}

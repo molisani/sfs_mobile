@@ -20,47 +20,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class AppointmentListActivity extends Activity implements OnItemClickListener {
+public class AppointmentListActivity extends AppointmentGeneralActivity implements OnItemClickListener {
 	
 	private String lastScreen, valueClicked; // values from the keys defined below
-	static final String LAST_SCREEN = "edu.upenn.cis350.sfs_mobile.LAST_SCREEN"; // key for the extra telling which screen we're coming from
-	static final String VALUE_CLICKED = "edu.upenn.cis350.sfs_mobile.VALUE_CLICKED"; // key for the extra telling which button we last clicked
-	static final String NEXT_SCREEN = "edu.upenn.cis350.sfs_mobile.NEXT_SCREEN"; // key for code indicating what screen should come next
-	static final String DEPARTMENT = "edu.upenn.cis350.sfs_mobile.DEPARTMENT"; // key for holding what department we'll be querying for an appt
-	static final String DATE = "edu.upenn.cis350.sfs_mobile.DATE"; // key for potential booking date
-	static final String CALLBACK = "edu.upenn.cis350.sfs_mobile.CALLBACK"; // key for callback number
-	static final String REASON = "edu.upenn.cis350.sfs_mobile.REASON"; // key for auxiliary reason field
-	static final String IMMUNIZATION = "edu.upenn.cis350.sfs_mobile.IMMUNIZATION"; // key for type of immunization field
-	static final String SUBTYPE = "edu.upenn.cis350.sfs_mobile.SUBTYPE"; // key for type of subtype of immunization field
-	
 	
 	ListView listView;
 	
-	static final String[] appointmentTypes = {
-			"Immunizations", "Health and Wellness", "Primary Care", 
-			"Sports Medicine", "Women's Health"
-	};
-	static final String[] immunizationTypes = {
-			"Immunizations (required and optional)", "PPD Placement", "Flu Vaccination",
-			"Designated Group Immunization Clinic"
-	};
-	static final String[] healthAndWellnessTypes = {
-			"Acupuncture or Massage Therapy Visit", "Rapid HIV Testing", "Smoking Cessation",
-			"Stress Reduction"
-	};
-	static final String[] womensHealthTypes = {
-			"Routine yearly gynecological exam", "STI Screening (except Rapid HIV Testing)", "Birth Control", 
-			"Other"
-	};
-	static final String[] subImmunizationTypes = {
-			"Gardasil (HPV) (optional)", "Hepatitis A (optional)", "Hepatitis B (satisfies requirement)", 
-			"Meningococcal (satisfied requirement)", "MMR (required for measles, mumps, rubella",
-			"Multiple Immunizations", "Tdap (satisfied requirement)", "Varicella (satisfies requirement)", "Other"
-	};
-	static final String[] acupunctureTypes = {
-		"Acupuncture - initial visit", "Acupuncture Follow-Up Visit", "Massage Therapy Visit"
-	};
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);

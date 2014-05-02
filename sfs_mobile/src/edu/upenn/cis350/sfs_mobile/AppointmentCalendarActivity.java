@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
 
-public class AppointmentCalendarActivity extends Activity {
+public class AppointmentCalendarActivity extends AppointmentGeneralActivity {
 	
 	CalendarView calendar;
 	Button button;
@@ -57,7 +57,7 @@ public class AppointmentCalendarActivity extends Activity {
 			Intent intent;
 			intent = new Intent(context, AppointmentBookActivity.class);
 			intent.putExtras(extras);
-			intent.putExtra(AppointmentListActivity.DATE, calendar.getDate());
+			intent.putExtra(DATE, calendar.getDate());
 			context.startActivity(intent);
 		}
 		

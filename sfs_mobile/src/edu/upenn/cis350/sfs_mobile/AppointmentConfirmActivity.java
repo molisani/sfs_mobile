@@ -14,7 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class AppointmentConfirmActivity extends Activity {
+public class AppointmentConfirmActivity extends AppointmentGeneralActivity {
 	
 	private TextView textView;
 	private String lastScreen, valueClicked;
@@ -31,9 +31,9 @@ public class AppointmentConfirmActivity extends Activity {
 		getActionBar().setTitle("SFS Mobile");  
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		lastScreen = extras.getString(AppointmentListActivity.LAST_SCREEN).toLowerCase();
-		if (extras != null && extras.containsKey(AppointmentListActivity.VALUE_CLICKED))
-			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
+		lastScreen = extras.getString(LAST_SCREEN).toLowerCase();
+		if (extras != null && extras.containsKey(VALUE_CLICKED))
+			valueClicked = intent.getExtras().getString(VALUE_CLICKED);
 		textView = (TextView) findViewById(R.id.messageView);
 		continueButton = (Button) findViewById(R.id.continueButton);
 		callButton = (Button) findViewById(R.id.callButton);
@@ -67,11 +67,11 @@ public class AppointmentConfirmActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			Intent intent;
-			if (currentStatus.equals(AppointmentListActivity.appointmentTypes[2]) ||
-					currentStatus.equals(AppointmentListActivity.appointmentTypes[3])) { // primary care
+			if (currentStatus.equals(appointmentTypes[2]) ||
+					currentStatus.equals(appointmentTypes[3])) { // primary care
 				intent = new Intent(context, AppointmentTextInputActivity.class);
 				intent.putExtras(extras);
-				intent.putExtra(AppointmentListActivity.NEXT_SCREEN, "reason");
+				intent.putExtra(NEXT_SCREEN, "reason");
 			} else {
 				System.out.println("Error 81: Can't determine next activity.");
 				return;

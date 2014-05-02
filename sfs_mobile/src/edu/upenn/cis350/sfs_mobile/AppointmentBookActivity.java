@@ -31,7 +31,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class AppointmentBookActivity extends Activity implements OnItemClickListener {
+public class AppointmentBookActivity extends AppointmentGeneralActivity implements OnItemClickListener {
 	
 	ListView listView;
 	String username, session_id, date, dept, booking_id, callback, reason;
@@ -51,16 +51,16 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 		setContentView(R.layout.activity_appointment_book);
 		Intent intent = getIntent();
 		extras = intent.getExtras();
-		System.out.println("bk dep: " + extras.getString(AppointmentListActivity.DEPARTMENT));
-		System.out.println("bk date: " + extras.getLong(AppointmentListActivity.DATE));
-		long dateLong = extras.getLong(AppointmentListActivity.DATE);
+		System.out.println("bk dep: " + extras.getString(DEPARTMENT));
+		System.out.println("bk date: " + extras.getLong(DATE));
+		long dateLong = extras.getLong(DATE);
 		
 		date = convLongToDate(dateLong);
 		username = extras.getString("Session_Username");
 		session_id = extras.getInt("Session_ID") + "";
-		dept = extras.getString(AppointmentListActivity.DEPARTMENT);
-		callback = extras.getString(AppointmentListActivity.CALLBACK);
-		reason = extras.getString(AppointmentListActivity.REASON);
+		dept = extras.getString(DEPARTMENT);
+		callback = extras.getString(CALLBACK);
+		reason = extras.getString(REASON);
 		
 		// convert content to string array
 		/*ArrayList<BasicNameValuePair> content = null; // set content (need to grab from php)
@@ -144,18 +144,18 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 			post.addField("set_appt", "");
 			post.addField("appointment_id", booking_id);
 			post.addField("patient", username);
-			post.addField("subtype", extras.containsKey(AppointmentListActivity.SUBTYPE) ? 
-					extras.getString(AppointmentListActivity.SUBTYPE) : null);
-			post.addField("immunization", extras.containsKey(AppointmentListActivity.IMMUNIZATION) ? 
-					extras.getString(AppointmentListActivity.IMMUNIZATION) : null);
-			post.addField("callback_num", extras.containsKey(AppointmentListActivity.CALLBACK) ? 
-					extras.getString(AppointmentListActivity.CALLBACK) : null);
-			post.addField("reason", extras.containsKey(AppointmentListActivity.REASON) ? 
-					extras.getString(AppointmentListActivity.REASON) : null);
-			System.out.println("Made Appt: immun = " + extras.getString(AppointmentListActivity.IMMUNIZATION) + "; subtype = " + extras.getString(AppointmentListActivity.SUBTYPE) +
+			post.addField("subtype", extras.containsKey(SUBTYPE) ? 
+					extras.getString(SUBTYPE) : null);
+			post.addField("immunization", extras.containsKey(IMMUNIZATION) ? 
+					extras.getString(IMMUNIZATION) : null);
+			post.addField("callback_num", extras.containsKey(CALLBACK) ? 
+					extras.getString(CALLBACK) : null);
+			post.addField("reason", extras.containsKey(REASON) ? 
+					extras.getString(REASON) : null);
+			System.out.println("Made Appt: immun = " + extras.getString(IMMUNIZATION) + "; subtype = " + extras.getString(SUBTYPE) +
 					"; id = " + booking_id + 
-					"; callback = " + extras.getString(AppointmentListActivity.CALLBACK) + "; reason = " 
-					+ extras.getString(AppointmentListActivity.REASON));
+					"; callback = " + extras.getString(CALLBACK) + "; reason = " 
+					+ extras.getString(REASON));
 			return post.execute();
 		}
 		

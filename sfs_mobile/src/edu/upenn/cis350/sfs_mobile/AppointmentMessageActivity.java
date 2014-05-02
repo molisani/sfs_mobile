@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class AppointmentMessageActivity extends Activity {
+public class AppointmentMessageActivity extends AppointmentGeneralActivity {
 	
 	TextView topTextView, middleTextView, bottomTextView;
 	String lastScreen, valueClicked;
@@ -42,14 +42,14 @@ public class AppointmentMessageActivity extends Activity {
 		setContentView(R.layout.activity_appointment_message);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		lastScreen = extras.getString(AppointmentListActivity.LAST_SCREEN).toLowerCase();
-		if (extras != null && extras.containsKey(AppointmentListActivity.VALUE_CLICKED))
-			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
+		lastScreen = extras.getString(LAST_SCREEN).toLowerCase();
+		if (extras != null && extras.containsKey(VALUE_CLICKED))
+			valueClicked = intent.getExtras().getString(VALUE_CLICKED);
 		String[] content = null;
 		if (lastScreen.equals("appointment_types")) {
-			if (valueClicked.equals(AppointmentListActivity.appointmentTypes[2])) { // primary care
+			if (valueClicked.equals(appointmentTypes[2])) { // primary care
 				content = primaryCareMessages;
-			} else if (valueClicked.equals(AppointmentListActivity.appointmentTypes[3])) { // sport medicine
+			} else if (valueClicked.equals(appointmentTypes[3])) { // sport medicine
 				content = sportsMedicineMessages;
 			} else {
 				System.out.println("Error 200: Could not determine button clicked.");

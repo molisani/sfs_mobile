@@ -15,7 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class AppointmentPhoneInputActivity extends Activity {
+public class AppointmentPhoneInputActivity extends AppointmentGeneralActivity {
 	
 	private TextView messageView;
 	private EditText editField;
@@ -38,14 +38,14 @@ public class AppointmentPhoneInputActivity extends Activity {
 		Bundle extras = intent.getExtras();
 		
 		// currently unnecessary
-		/*lastScreen = extras.getString(AppointmentListActivity.LAST_SCREEN).toLowerCase();
-		if (extras != null && extras.containsKey(AppointmentListActivity.VALUE_CLICKED))
-			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
+		/*lastScreen = extras.getString(LAST_SCREEN).toLowerCase();
+		if (extras != null && extras.containsKey(VALUE_CLICKED))
+			valueClicked = intent.getExtras().getString(VALUE_CLICKED);
 			*/
 		
 		messageView = (TextView) findViewById(R.id.messageViewPhone);
 		String content;
-		if (intent.getStringExtra(AppointmentListActivity.NEXT_SCREEN).equals("callback")) {
+		if (intent.getStringExtra(NEXT_SCREEN).equals("callback")) {
 			content = callbackMessage; 
 		} else {
 			System.out.println("Error 80: Can't determine what next activity is.");
@@ -82,7 +82,7 @@ public class AppointmentPhoneInputActivity extends Activity {
 			if (currentStatus.equals(callbackMessage)) {
 				intent = new Intent(context, AppointmentCalendarActivity.class);
 				intent.putExtras(extras);
-				intent.putExtra(AppointmentListActivity.CALLBACK, editField.getText().toString());
+				intent.putExtra(CALLBACK, editField.getText().toString());
 			} else {
 				System.out.println("Error 81: Can't determine next activity.");
 				return;
