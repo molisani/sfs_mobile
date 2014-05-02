@@ -1,5 +1,6 @@
 package edu.upenn.cis350.sfs_mobile;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -17,7 +18,7 @@ public class AppointmentConfirmActivity extends Activity {
 	
 	private TextView textView;
 	private String lastScreen, valueClicked;
-	private Button continueButton;
+	private Button continueButton, callButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -35,11 +36,14 @@ public class AppointmentConfirmActivity extends Activity {
 			valueClicked = intent.getExtras().getString(AppointmentListActivity.VALUE_CLICKED);
 		textView = (TextView) findViewById(R.id.messageView);
 		continueButton = (Button) findViewById(R.id.continueButton);
+		callButton = (Button) findViewById(R.id.callButton);
 		if (lastScreen.equals("appointment_types")) {
 			textView.setText("If you require immediate medical attention, please call 215-746-3535 during " +
 					"SHS operating hours and choose option 2 to book an appointment.");
 			continueButton.setOnClickListener(new OnContinueListener(valueClicked, this, 
 					extras));
+			
+			callButton.setOnClickListener(new OnCallListener());
 		} 
 	}
 	
@@ -73,6 +77,27 @@ public class AppointmentConfirmActivity extends Activity {
 				return;
 			}
 			context.startActivity(intent);
+		}
+		
+	}
+	
+	/** 
+	 * Implementation of OnClickListener that opens the dialer and populates the phone number with SHS's
+	 * @author Tadas
+	 *
+	 */
+	private class OnCallListener implements OnClickListener {
+		
+		public OnCallListener() {
+			
+		}
+		
+		@Override
+		public void onClick(View v) {
+			Intent intent;
+			intent = new Intent(Intent.ACTION_DIAL);
+			intent.setData(Uri.parse("tel:215-746-3535"));
+			startActivity(intent);
 		}
 		
 	}

@@ -54,7 +54,7 @@
         android:entries="@array/day_array" />
 
     <TextView
-        android:id="@+id/editText1"
+        android:id="@+id/editFieldPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"

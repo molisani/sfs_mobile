@@ -187,7 +187,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 						itemText.equals(immunizationTypes[1]) || // ppd placement
 						itemText.equals(immunizationTypes[2]) || // flu vaccination
 						itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
+					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class);
 					intent.putExtra(VALUE_CLICKED, itemText);
 					intent.putExtra(IMMUNIZATION, itemText);
 					intent.putExtras(this.getIntent().getExtras());
@@ -240,7 +240,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 		
 		// subImmunizationTypes
 		} else if (lastScreen.equals("immunization_types")) {
-			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
+			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class);
 			intent.putExtra(SUBTYPE, itemText);
 			intent.putExtras(this.getIntent().getExtras());
 			intent.putExtra(NEXT_SCREEN, "callback");

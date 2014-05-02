@@ -6,33 +6,37 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".AppointmentConfirmActivity" >
-
-    <Button
-        android:id="@+id/continueButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Continue Anyway" />
+    tools:context=".AppointmentPhoneInputActivity" >
 
     <TextView
-        android:id="@+id/messageView"
+        android:id="@+id/messageViewPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="88dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:layout_marginTop="94dp"
+        android:text="Medium Text"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <Button
-        android:id="@+id/callButton"
+    <EditText
+        android:id="@+id/editFieldPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/continueButton"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:text="Call Now" />
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:inputType="phone" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:id="@+id/submitButtonPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editFieldPhone"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:text="Submit" />
 
 </RelativeLayout>
