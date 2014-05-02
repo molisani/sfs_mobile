@@ -92,20 +92,16 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 				arr = input.getJSONArray("appts");
 				for (int i = 0; i < arr.length(); i++) {
 						JSONObject curr = (JSONObject) arr.get(i);
-						System.out.println("apptbook " + curr);
-						String immun = curr.has("immunization") ? curr.getString("immunization").toString() : null;
-						String subtype = curr.has("subtype") ? curr.getString("subtype").toString() : null;
-						String callback = curr.has("callback") ? curr.getString("callback").toString() : null;
-						String reason = curr.has("reason") ? curr.getString("reason").toString() : null;
+						
 						Appointment tempAppt = new Appointment( 
-								immun, // TODO test
+								null, 
 								curr.getString("duration").toString(),
 								new Timestamp(curr.getString("appt_time").toString()),
 								curr.getString("appointment_id").toString(),
 								dept,
-								subtype,
-								callback,
-								reason
+								null,
+								null,
+								null
 								);
 						apptArr.add(tempAppt);
 				}
@@ -148,10 +144,18 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 			post.addField("set_appt", "");
 			post.addField("appointment_id", booking_id);
 			post.addField("patient", username);
-			post.addField("subtype", "");
-			post.addField("immunization", "");
-			post.addField("callback_num", "0000000000");
-			post.addField("reason", "");
+			post.addField("subtype", extras.containsKey(AppointmentListActivity.SUBTYPE) ? 
+					extras.getString(AppointmentListActivity.SUBTYPE) : null);
+			post.addField("immunization", extras.containsKey(AppointmentListActivity.IMMUNIZATION) ? 
+					extras.getString(AppointmentListActivity.IMMUNIZATION) : null);
+			post.addField("callback_num", extras.containsKey(AppointmentListActivity.CALLBACK) ? 
+					extras.getString(AppointmentListActivity.CALLBACK) : null);
+			post.addField("reason", extras.containsKey(AppointmentListActivity.REASON) ? 
+					extras.getString(AppointmentListActivity.REASON) : null);
+			System.out.println("Made Appt: immun = " + extras.getString(AppointmentListActivity.IMMUNIZATION) + "; subtype = " + extras.getString(AppointmentListActivity.SUBTYPE) +
+					"; id = " + booking_id + 
+					"; callback = " + extras.getString(AppointmentListActivity.CALLBACK) + "; reason = " 
+					+ extras.getString(AppointmentListActivity.REASON));
 			return post.execute();
 		}
 		
@@ -159,6 +163,18 @@ public class AppointmentBookActivity extends Activity implements OnItemClickList
 			if (input != null) {
 				try {
 					if (input.getBoolean("success")) {
+						/*
+						 * System.out.println("apptbook " + curr);
+						String immun = ;
+						String subtype = curr.has("subtype") ? curr.getString("subtype").toString() : null;
+						String callback = curr.has("callback_num") ? curr.getString("callback").toString() : null;
+						String reason = curr.has("reason") ? curr.getString("reason").toString() : null;
+						
+						System.out.println("Made Appt: immun = " + immun + "; dep = " + dept + "; subtype = " + subtype +
+								"; dur = " + curr.getString("duration").toString() + "; id = " + curr.getString("appointment_id").toString() + 
+								"; cal = " + new Timestamp(curr.getString("appt_time").toString()) + "; callback = " + callback + "; reason = " 
+								+ reason);
+						 */
 						Intent i = new Intent(recentActivity, HomeScreen.class);
 						i.putExtra("Session_Username", recentActivity.getIntent().getExtras().getString("Session_Username"));
 						i.putExtra("Session_ID", recentActivity.getIntent().getExtras().getInt("Session_ID"));

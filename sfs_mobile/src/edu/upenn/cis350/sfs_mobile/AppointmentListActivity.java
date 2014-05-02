@@ -30,6 +30,9 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 	static final String DATE = "edu.upenn.cis350.sfs_mobile.DATE"; // key for potential booking date
 	static final String CALLBACK = "edu.upenn.cis350.sfs_mobile.CALLBACK"; // key for callback number
 	static final String REASON = "edu.upenn.cis350.sfs_mobile.REASON"; // key for auxiliary reason field
+	static final String IMMUNIZATION = "edu.upenn.cis350.sfs_mobile.IMMUNIZATION"; // key for type of immunization field
+	static final String SUBTYPE = "edu.upenn.cis350.sfs_mobile.SUBTYPE"; // key for type of subtype of immunization field
+	
 	
 	ListView listView;
 	
@@ -178,12 +181,15 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 			if (valueClicked.equals(appointmentTypes[0])) { // immunizations
 				if (itemText.equals(immunizationTypes[0])) { // other immunizations
 					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
+					intent.putExtra(IMMUNIZATION, itemText);
 					intent.putExtras(this.getIntent().getExtras());
 				} else if (
 						itemText.equals(immunizationTypes[1]) || // ppd placement
 						itemText.equals(immunizationTypes[2]) || // flu vaccination
 						itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
 					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
+					intent.putExtra(VALUE_CLICKED, itemText);
+					intent.putExtra(IMMUNIZATION, itemText);
 					intent.putExtras(this.getIntent().getExtras());
 					intent.putExtra(NEXT_SCREEN, "callback");
 				} else {
@@ -235,6 +241,7 @@ public class AppointmentListActivity extends Activity implements OnItemClickList
 		// subImmunizationTypes
 		} else if (lastScreen.equals("immunization_types")) {
 			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
+			intent.putExtra(SUBTYPE, itemText);
 			intent.putExtras(this.getIntent().getExtras());
 			intent.putExtra(NEXT_SCREEN, "callback");
 			intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
