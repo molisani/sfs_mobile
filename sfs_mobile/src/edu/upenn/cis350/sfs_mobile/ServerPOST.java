@@ -33,7 +33,8 @@ public class ServerPOST {
 	
 	public ServerPOST(String php, String... keyvals){
 		url = "https://fling.seas.upenn.edu/~molisani/cgi-bin/" + php;
-		query = new ArrayList<NameValuePair>();		if (keyvals.length % 2 != 1) {
+		query = new ArrayList<NameValuePair>();
+		if (keyvals.length % 2 != 1) {
 			for (int i = 0; i < keyvals.length; i += 2) {
 				addField(keyvals[i], keyvals[i + 1]);
 			}
