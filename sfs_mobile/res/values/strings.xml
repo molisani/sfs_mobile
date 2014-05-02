@@ -24,6 +24,7 @@
     <string name="cancel">Cancel</string>
     <string name="reauth">Re-Authorize</string>
     <string name="reauthtop">You Need to Re-Authorize</string>
+    <string name="shs_hours">Hours:\nMonday: 8:00am - 7:30pm\nTuesday: 8:00am - 7:30pm\nWednesday: 8:00am - 7:30pm\nThursday: 10:30am - 5:30pm\nFriday: 8:00am - 5:30pm\nSaturday: 11:00am - 4:30pm</string>
 
     <string-array name="year_array">
         <item>2010</item>

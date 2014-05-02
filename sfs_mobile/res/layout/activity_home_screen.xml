@@ -15,14 +15,25 @@
         android:alpha=".1"
         android:contentDescription="@string/PennLogo"
         android:src="@drawable/penn_logo" />
-    
+
     <TextView
         android:id="@+id/messageView"
-        android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
+        android:layout_alignTop="@+id/penn_logo"
+        android:layout_centerHorizontal="true"
         android:text="@string/shs_main_screen"
         android:textSize="30sp"
         android:typeface="sans" />
+
+    <TextView
+        android:id="@+id/editText1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/penn_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="56dp"
+        android:text="@string/shs_hours"
+        android:textSize="20sp" />
     
 </RelativeLayout>
