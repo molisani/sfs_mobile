@@ -1,14 +1,8 @@
 package edu.upenn.cis350.sfs_mobile;
 
 import android.os.Bundle;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -19,37 +13,28 @@ public class AppointmentTextInputActivity extends AppointmentGeneralActivity {
 	
 	private TextView messageView;
 	private EditText editField;
-	private String lastScreen, valueClicked;
 	private Button submitButton;
-	
-	final static String visitReasonMessage = "Please enter the reason for your visit.";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		// initialize
 		super.onCreate(savedInstanceState);
-		ActionBar ab = getActionBar(); 
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
-        ab.setBackgroundDrawable(colorDrawable);
-		setContentView(R.layout.activity_login);
-        getActionBar().setTitle("SFS Mobile");  
 		setContentView(R.layout.activity_appointment_text_input);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		
-		// currently unnecessary
-		/*lastScreen = extras.getString(LAST_SCREEN).toLowerCase();
-		if (extras != null && extras.containsKey(VALUE_CLICKED))
-			valueClicked = intent.getExtras().getString(VALUE_CLICKED);
-			*/
-		
 		messageView = (TextView) findViewById(R.id.messageView);
 		String content;
-		if (intent.getStringExtra(NEXT_SCREEN).equals("reason")) {
-			content = visitReasonMessage;
+		
+		// content
+		if (extras.getString(NEXT_ACTION).equals("reason")) {
+			content = reasonMessage; 
 		} else {
 			System.out.println("Error 80: Can't determine what next activity is.");
 			return;
 		}
+		
+		// display
 		messageView.setText(content);
 		editField = (EditText) findViewById(R.id.editField);
 		submitButton = (Button) findViewById(R.id.submitButton);
@@ -78,10 +63,10 @@ public class AppointmentTextInputActivity extends AppointmentGeneralActivity {
 		@Override
 		public void onClick(View v) {
 			Intent intent;
-			if (currentStatus.equals(visitReasonMessage)) {
-				intent = new Intent(context, AppointmentPhoneInputActivity.class);
+			if (currentStatus.equals(reasonMessage)) {
+				intent = new Intent(context, AppointmentCalendarActivity.class);
 				intent.putExtras(extras);
-				intent.putExtra(NEXT_SCREEN, "callback");
+				intent.putExtra(NEXT_ACTION, "calendar");
 				intent.putExtra(REASON, editField.getText().toString());
 			} else {
 				System.out.println("Error 81: Can't determine next activity.");
@@ -91,39 +76,6 @@ public class AppointmentTextInputActivity extends AppointmentGeneralActivity {
 			context.startActivity(intent);
 		}
 		
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.appointment_text_input, menu);
-		return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-		Intent intent;
-	    switch (item.getItemId()) {
-	        case R.id.my_appts_action:
-	        	intent = new Intent(this, MyAppointments.class);
-	        	intent.putExtras(getIntent().getExtras());
-	        	startActivity(intent);
-	            return true;
-	        case R.id.messages_action:
-	        	intent = new Intent(this, MyMessages.class);
-	        	intent.putExtras(getIntent().getExtras());
-	        	startActivity(intent);
-	        case R.id.logout:
-	        	Bundle b = getIntent().getExtras();
-	        	ServerPOSTLogout logout = new ServerPOSTLogout("auth.php",
-						b.getString("Session_Username"), b.getInt("Session_ID") + "");
-	        	logout.execute();
-	        	intent = new Intent(this, LoginActivity.class);
-	        	startActivity(intent);
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
 	}
 
 }

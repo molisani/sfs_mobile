@@ -5,13 +5,7 @@ package edu.upenn.cis350.sfs_mobile;
  */
 
 import android.os.Bundle;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,206 +16,153 @@ import android.widget.Toast;
 
 public class AppointmentListActivity extends AppointmentGeneralActivity implements OnItemClickListener {
 	
-	private String lastScreen, valueClicked; // values from the keys defined below
-	
 	ListView listView;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		// initialize
 		super.onCreate(savedInstanceState);
-		ActionBar ab = getActionBar(); 
-        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
-        ab.setBackgroundDrawable(colorDrawable);
-        getActionBar().setTitle("SFS Mobile");  
 		setContentView(R.layout.activity_appointment_list);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		lastScreen = extras.getString(LAST_SCREEN).toLowerCase();
-		if (extras != null && extras.containsKey(VALUE_CLICKED))
-			valueClicked = intent.getExtras().getString(VALUE_CLICKED);
+		nextAction = extras.getString(NEXT_ACTION).toLowerCase();
 		String[] content = null;
+		System.out.println("cur: " + nextAction);
 		
-		if (lastScreen.equals("make_appointment")) { 
+		// set content
+		if (nextAction.equals("appointment_types")) { 
 			content = appointmentTypes;
-		} else if (lastScreen.equals("appointment_types")) {
-			if (valueClicked.equals(appointmentTypes[0])) { // immunizations
-				content = immunizationTypes;
-			} else if (valueClicked.equals(appointmentTypes[1])) { // health & wellness
-				content = healthAndWellnessTypes;
-			} else if (valueClicked.equals(appointmentTypes[4])) { // women's health
-				content = womensHealthTypes;
-			} else {
-				System.out.println("Error 90: Content not found");
-				content = null;
-			}
-		} else if (lastScreen.equals("immunization_types")) {
+		} else if (nextAction.equals("immunization_types")) {
+			content = immunizationTypes;
+		} else if (nextAction.equals("health_and_wellness_types")) {
+			content = healthAndWellnessTypes;
+		} else if (nextAction.equals("womens_health_types")) { 
+			content = womensHealthTypes;
+		} else if (nextAction.equals("sub_immunization_types")) {
 			content = subImmunizationTypes;
-		} else if (lastScreen.equals("health_and_wellness_types")) {
+		} else if (nextAction.equals("acupuncture_types")) {
 			content = acupunctureTypes;
 		} else {
 			System.out.println("Error 500: Could not determine what content to display.");
 			return;
 		}
+		
+		// display
 		listView = (ListView) findViewById(R.id.appointmentListView);
 		ArrayAdapter atlAdapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1 , content);
 		listView.setAdapter(atlAdapter);
 		listView.setOnItemClickListener(this);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.appt_list_activity, menu);
-		return true;
-	}
 	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-	    // Handle presses on the action bar items
-		Intent intent;
-	    switch (item.getItemId()) {
-	        case R.id.my_appts_action:
-	        	intent = new Intent(this, MyAppointments.class);
-	        	intent.putExtras(getIntent().getExtras());
-	        	startActivity(intent);
-	            return true;
-	        case R.id.messages_action:
-	        	intent = new Intent(this, MyMessages.class);
-	        	intent.putExtras(getIntent().getExtras());
-	        	startActivity(intent);
-	            return true;
-	        case R.id.logout:
-	        	Bundle b = getIntent().getExtras();
-	        	ServerPOSTLogout logout = new ServerPOSTLogout("auth.php",
-						b.getString("Session_Username"), b.getInt("Session_ID") + "");
-	        	logout.execute();
-	        	intent = new Intent(this, LoginActivity.class);
-	        	startActivity(intent);
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
-	}
-
 	/**
 	 * Logic for determining the next activity
 	 */
 	@Override
 	public void onItemClick(AdapterView<?> adapterView, View view, int i, long j) {
+		
+		// initialize
 		String itemText = ((String) ((TextView) view).getText());
 		Toast.makeText(this, itemText, Toast.LENGTH_SHORT).show();
 		Intent intent = null;
-		
+		Class nextClass = null;
+		String dept = null, nextAct = null, subtype = null, immunization = null;
 		
 		// appointment_types screen 
-		if (lastScreen.equals("make_appointment")) { 
-			if (
-					itemText.equals(appointmentTypes[0]) || // immunizations
-					itemText.equals(appointmentTypes[1]) || // health & wellness
-					itemText.equals(appointmentTypes[4])) {	// women's health
-				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
-				intent.putExtras(this.getIntent().getExtras());
-				if (itemText.equals(appointmentTypes[0]))
-					intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
-				else if (itemText.equals(appointmentTypes[1]))
-					intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
-				else if (itemText.equals(appointmentTypes[4]))
-					intent.putExtra(AppointmentListActivity.DEPARTMENT, "w");
-			} else if ( // TODO reroute this
-					itemText.equals(appointmentTypes[2]) || // primary care
-					itemText.equals(appointmentTypes[3])) {	// sports medicine
-				intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class);
-				intent.putExtras(this.getIntent().getExtras());
-				if (itemText.equals(appointmentTypes[2]))
-					intent.putExtra(AppointmentListActivity.DEPARTMENT, "p");
-				else if (itemText.equals(appointmentTypes[3]))
-					intent.putExtra(AppointmentListActivity.DEPARTMENT, "s");
+		if (nextAction.equals("appointment_types")) { 
+			if (itemText.equals(appointmentTypes[0])) { // immunizations
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				dept = "i";
+				nextAct = "immunization_types";
+			} else if (itemText.equals(appointmentTypes[1])) { // health & wellness
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				dept = "h";
+				nextAct = "health_and_wellness_types";
+			} else if (itemText.equals(appointmentTypes[4])) { // women's health
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				dept = "w";
+				nextAct = "womens_health_types";
+			} else if (itemText.equals(appointmentTypes[2])) { // primary care
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class;
+				dept = "p";
+				nextAct = "confirm_nonemergency";
+			} else if (itemText.equals(appointmentTypes[3])) { // sports medicine
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class;
+				dept = "s";
+				nextAct = "confirm_nonemergency";
 			} else {
 				System.out.println("ERROR 100: Could not identify list item clicked");
 				return;
 			}
-			intent.putExtra(LAST_SCREEN, "appointment_types");
 		
 		// immunization_types, health_and_wellness_types, women's_health_types screens
-		} else if (lastScreen.equals("appointment_types")) {
-			if (valueClicked.equals(appointmentTypes[0])) { // immunizations
-				if (itemText.equals(immunizationTypes[0])) { // other immunizations
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
-					intent.putExtra(IMMUNIZATION, itemText);
-					intent.putExtras(this.getIntent().getExtras());
-				} else if (
-						itemText.equals(immunizationTypes[1]) || // ppd placement
-						itemText.equals(immunizationTypes[2]) || // flu vaccination
-						itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class);
-					intent.putExtra(VALUE_CLICKED, itemText);
-					intent.putExtra(IMMUNIZATION, itemText);
-					intent.putExtras(this.getIntent().getExtras());
-					intent.putExtra(NEXT_SCREEN, "callback");
-				} else {
-					System.out.println("ERROR 101: Could not identify list item clicked");
-					return;
-				}
-				intent.putExtra(LAST_SCREEN, "immunization_types");
-				intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
-			} else if (valueClicked.equals(appointmentTypes[1])) { // health and wellness
-				if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class);
-					intent.putExtras(this.getIntent().getExtras());
-				} else if (
-						itemText.equals(healthAndWellnessTypes[1]) || // HIV
-						itemText.equals(healthAndWellnessTypes[2]) || // smoking
-						itemText.equals(healthAndWellnessTypes[3])) { // stress
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
-					intent.putExtras(this.getIntent().getExtras());
-					intent.putExtra(NEXT_SCREEN, "reason");
-				} else {
-					System.out.println("Error 505: Could not determine next activity.");
-					return;
-				}
-				intent.putExtra(LAST_SCREEN, "health_and_wellness_types");
-				intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
-			} else if (valueClicked.equals(appointmentTypes[4])) { // women's health
-				if (
-						itemText.equals(womensHealthTypes[0]) ||
-						itemText.equals(womensHealthTypes[1]) ||
-						itemText.equals(womensHealthTypes[2])) {
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
-					intent.putExtras(this.getIntent().getExtras());
-					intent.putExtra(NEXT_SCREEN, "reason");	
-				} else if (itemText.equals(womensHealthTypes[3])) {
-					intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class);
-					intent.putExtras(this.getIntent().getExtras());
-				} else {
-					System.out.println("ERROR 103: Could not identify next activity");
-					return;
-				}
-				intent.putExtra(LAST_SCREEN, "womens_health_types");
-				intent.putExtra(AppointmentListActivity.DEPARTMENT, "w");
-				
+		} else if (nextAction.equals("immunization_types")) {
+			if (itemText.equals(immunizationTypes[0])) { // other immunizations
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextAct = "sub_immunization_types";
+			} else if (itemText.equals(immunizationTypes[1]) || // ppd placement
+					itemText.equals(immunizationTypes[2]) || // flu vaccination
+					itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class;
+				nextAct = "callback";
 			} else {
-				System.out.println("ERROR 102: Could not identify list item clicked");
+				System.out.println("ERROR 101: Could not identify list item clicked");
+				return;
+			}
+			immunization = itemText;
+		} else if (nextAction.equals("health_and_wellness_types")) { 
+			if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextAct = "acupuncture_types";
+			} else if (
+					itemText.equals(healthAndWellnessTypes[1]) || // HIV
+					itemText.equals(healthAndWellnessTypes[2]) || // smoking
+					itemText.equals(healthAndWellnessTypes[3])) { // stress
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+				nextAct = "reason";
+			} else {
+				System.out.println("Error 505: Could not determine next activity.");
+				return;
+			}
+		} else if (nextAction.equals("womens_health_types")) { 
+			if (
+					itemText.equals(womensHealthTypes[0]) ||
+					itemText.equals(womensHealthTypes[1]) ||
+					itemText.equals(womensHealthTypes[2])) {
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+				nextAct = "reason";
+			} else if (itemText.equals(womensHealthTypes[3])) {
+				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class;
+				nextAct = "womens_health_message";
+			} else {
+				System.out.println("ERROR 103: Could not identify next activity");
 				return;
 			}
 		
 		// subImmunizationTypes
-		} else if (lastScreen.equals("immunization_types")) {
-			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class);
-			intent.putExtra(SUBTYPE, itemText);
-			intent.putExtras(this.getIntent().getExtras());
-			intent.putExtra(NEXT_SCREEN, "callback");
-			intent.putExtra(AppointmentListActivity.DEPARTMENT, "i");
+		} else if (nextAction.equals("sub_immunization_types")) {
+			nextClass = edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class;
+			nextAct = "callback";
+			subtype = itemText;
 		
 		// acupunctureTypes
-		} else if (lastScreen.equals("health_and_wellness_types")) {
-			intent = new Intent(this, edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class);
-			intent.putExtras(this.getIntent().getExtras());
-			intent.putExtra(NEXT_SCREEN, "reason");
-			intent.putExtra(AppointmentListActivity.DEPARTMENT, "h");
+		} else if (nextAction.equals("acupuncture_types")) {
+			nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+			nextAct = "reason";
+			subtype = itemText;
 			
 		} else {
 			System.out.println("Error 50: Could not determine next activity.");
 		}
-		intent.putExtra(VALUE_CLICKED, itemText);
+		
+		// progress
+		System.out.println("next: " + nextAct);
+		intent = new Intent(this, nextClass);
+		intent.putExtras(getIntent().getExtras());
+		intent.putExtra(NEXT_ACTION, nextAct != null ? nextAct : getIntent().getExtras().getString(NEXT_ACTION));
+		intent.putExtra(DEPARTMENT, dept != null ? dept : getIntent().getExtras().getString(DEPARTMENT));
+		intent.putExtra(IMMUNIZATION, immunization != null ? immunization : getIntent().getExtras().getString(IMMUNIZATION));
+		intent.putExtra(SUBTYPE, subtype != null ? subtype : getIntent().getExtras().getString(SUBTYPE));
 		startActivity(intent);
 	}
 
