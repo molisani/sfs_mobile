@@ -45,4 +45,9 @@ public class Timestamp {
 	public String getDate() {
 		return dayName + ", " + monthName + " " + day;
 	}
+	
+	public int totalTime() {
+		int result = Integer.parseInt(minute) + Integer.parseInt(hour) + Integer.parseInt(day) + Integer.parseInt(month) + Integer.parseInt(year);
+		return result;
+	}
 }

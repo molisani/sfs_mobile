@@ -1,6 +1,9 @@
 package edu.upenn.cis350.sfs_mobile;
 
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -11,6 +14,7 @@ import android.app.ActionBar;
 import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -23,6 +27,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,6 +37,7 @@ public class MyMessages extends Activity {
 	private int id = 0;
 	private String username = "";
 	private Bundle extras = null;
+	private Set<Integer> readMsgs = new HashSet<Integer>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,20 +143,25 @@ public class MyMessages extends Activity {
 				} catch (JSONException e) {
 					e.printStackTrace();
 				}
-
+				
+				Collections.sort(msgArr);
 				String[] content = new String[msgArr.size()];
 				for (int i = 0; i < msgArr.size(); i++) {
 					content[i] = msgArr.get(i).toString();
+					if (msgArr.get(i).read)
+						readMsgs.add(i);
 				}
 				final ListView listView = (ListView) findViewById(R.id.my_msgs_list);
-				ArrayAdapter atlAdapter = new ArrayAdapter(MyMessages.this,
+				@SuppressWarnings("unchecked")
+				colorAdapter atlAdapter = new colorAdapter(MyMessages.this,
 						android.R.layout.simple_list_item_1, content);
+				//atlAdapter.getView(position, convertView, parent)
 				listView.setAdapter(atlAdapter);
 				
 				listView.setClickable(true);
 				listView.setOnItemClickListener(new OnItemClickListener() {					
 					public void onItemClick(AdapterView<?> arg0, View view, int position, long id) {
-					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt());				         
+					     openMsg(msgArr.get(position).getId(), msgArr.get(position).getApt(), msgArr.get(position).getSubj(), msgArr.get(position).getSender());				         
 					}
 				});
 			} else {
@@ -160,10 +171,12 @@ public class MyMessages extends Activity {
 		}
 	}
 	
-	public void openMsg(int msgId, int aptId) {
+	public void openMsg(int msgId, int aptId, String subj, String sender) {
 		Intent intent=new Intent(this, MessageDetail.class);
 		extras.putInt("id", msgId);
 		extras.putInt("apt", aptId);
+		extras.putString("subj", subj);
+		extras.putString("sender", sender);
 	    intent.putExtras(extras);
 	    startActivity(intent);
 	}
@@ -187,4 +200,28 @@ public class MyMessages extends Activity {
 	    dialog.dismiss();
 	    super.onBackPressed();
 	}
+	
+	public class colorAdapter extends ArrayAdapter {
+		
+		private final Context context;
+		private final Object[] values;
+		private final int layout;
+
+		public colorAdapter(Context context, int resource, Object[] objects) {
+			super(context, resource, objects);
+			this.context = context;
+			this.layout = resource;
+			this.values = objects;
+		}
+
+		@Override
+		public View getView(int position, View convertView, ViewGroup parent) {
+		    View view = super.getView(position, convertView, parent);
+		    if (readMsgs.contains(position)) {
+		        view.setBackgroundColor(Color.parseColor("#0A286E"));
+		    }
+		    return view;
+		}
+	}
+	
 }

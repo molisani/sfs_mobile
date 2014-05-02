@@ -8,11 +8,54 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="edu.upenn.cis350.sfs_mobile.MessageDetail$PlaceholderFragment" >
 
-	<TextView
-	    android:id="@+id/msg_body"
-	    android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-        
-        
-	</TextView>
+	<LinearLayout
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="true"
+	    android:layout_marginTop="32dp"
+	    android:orientation="vertical" >
+	    
+	    <TextView
+	        android:id="@+id/apt_lbl"
+	        android:layout_width="268dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.68"
+	        android:text="Appointment:"
+	        android:textSize="15sp"
+	        android:textStyle="bold" />
+	    
+	    <TextView
+		    android:id="@+id/msg_apt"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		    android:layout_alignParentTop="true"
+		    android:layout_centerHorizontal="true"
+		    android:layout_marginTop="10dp" />
+
+	    <TextView
+	        android:id="@+id/msg_lbl"
+	        android:layout_width="268dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.68"
+	        android:text="Message:"
+	        android:textSize="15sp"
+	        android:textStyle="bold" />
+
+	    <TextView
+	        android:id="@+id/msg_body"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="10dp" />
+
+	    <Button
+	        android:id="@+id/reply"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1.68"
+	        android:layout_marginTop="20dp"
+	        android:onClick="reply"
+	        android:text="Reply" />
+
+	</LinearLayout>
+
 </RelativeLayout>
