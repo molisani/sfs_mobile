@@ -77,6 +77,11 @@ public class MessageDetail extends Activity {
 	        	intent.putExtras(extras);
 	        	startActivity(intent);
 	            return true;
+	        case R.id.home_action:
+	        	intent = new Intent(this, HomeScreen.class);
+	        	intent.putExtras(extras);
+	        	startActivity(intent);
+	            return true;
 	        case R.id.my_appts_action:
 	        	intent = new Intent(this, MyAppointments.class);
 	        	intent.putExtras(extras);

@@ -47,7 +47,8 @@ public class Timestamp {
 	}
 	
 	public int totalTime() {
-		int result = Integer.parseInt(minute) + Integer.parseInt(hour) + Integer.parseInt(day) + Integer.parseInt(month) + Integer.parseInt(year);
+		
+		int result = Integer.parseInt(minute) + Integer.parseInt(hour) + Integer.parseInt(day) + Integer.parseInt(month)*31 + Integer.parseInt(year);
 		return result;
 	}
 }

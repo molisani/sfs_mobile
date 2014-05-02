@@ -1,9 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="edu.upenn.cis350.sfs_mobile.MessageDetail" >
-    <item android:id="@id/make_appts_option" android:showAsAction="never" android:title="@string/make_appts_option"></item>
+    <item android:id="@id/home_action" android:showAsAction="never" android:title="@string/home_option"></item><item android:id="@id/make_appts_option" android:showAsAction="never" android:title="@string/make_appts_option"></item>
     <item android:id="@id/my_appts_action" android:showAsAction="never" android:title="@string/my_appts_option"></item>
     <item android:id="@id/messages_action" android:showAsAction="never" android:title="@string/messages_option"></item>
     <item android:id="@id/logout" android:showAsAction="never" android:title="@string/logout"></item>
+    
 
 </menu>
