@@ -1,4 +1,4 @@
-sfs_mobile
+shs_mobile
 ==========
 
-(edu.upenn.cis350.sfs_mobile) Android front-end for electronic medical records.
+(edu.upenn.cis350.shs_mobile) Android front-end for electronic medical records.
