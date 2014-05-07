@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CalendarView;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class AppointmentCalendarActivity extends AppointmentGeneralActivity {
 	

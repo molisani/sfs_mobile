@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 /**
  * The purpose of this superclass is to hold all the duplicate code and data-like variables. It is the parent
@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Menu;
 import android.view.MenuItem;
+import edu.upenn.cis350.shs_mobile.R;
 
 public abstract class AppointmentGeneralActivity extends Activity {
 	
@@ -20,14 +21,14 @@ public abstract class AppointmentGeneralActivity extends Activity {
 	protected String nextAction;
 	
 	// Keys for keeping track of the workflow and associated values
-	protected static final String PREV_TOKEN = "edu.upenn.cis350.sfs_mobile.PREV_TOKEN"; // which button we last clicked
-	protected static final String NEXT_ACTION = "edu.upenn.cis350.sfs_mobile.NEXT_ACTION"; // indicates what screen should come next
-	protected static final String DEPARTMENT = "edu.upenn.cis350.sfs_mobile.DEPARTMENT"; // holding what department we'll be querying for an appt
-	protected static final String DATE = "edu.upenn.cis350.sfs_mobile.DATE"; // potential booking date
-	protected static final String CALLBACK = "edu.upenn.cis350.sfs_mobile.CALLBACK"; // callback number
-	protected static final String REASON = "edu.upenn.cis350.sfs_mobile.REASON"; // auxiliary reason field
-	protected static final String IMMUNIZATION = "edu.upenn.cis350.sfs_mobile.IMMUNIZATION"; // type of immunization field
-	protected static final String SUBTYPE = "edu.upenn.cis350.sfs_mobile.SUBTYPE"; // type of subtype of immunization field
+	protected static final String PREV_TOKEN = "edu.upenn.cis350.shs_mobile.PREV_TOKEN"; // which button we last clicked
+	protected static final String NEXT_ACTION = "edu.upenn.cis350.shs_mobile.NEXT_ACTION"; // indicates what screen should come next
+	protected static final String DEPARTMENT = "edu.upenn.cis350.shs_mobile.DEPARTMENT"; // holding what department we'll be querying for an appt
+	protected static final String DATE = "edu.upenn.cis350.shs_mobile.DATE"; // potential booking date
+	protected static final String CALLBACK = "edu.upenn.cis350.shs_mobile.CALLBACK"; // callback number
+	protected static final String REASON = "edu.upenn.cis350.shs_mobile.REASON"; // auxiliary reason field
+	protected static final String IMMUNIZATION = "edu.upenn.cis350.shs_mobile.IMMUNIZATION"; // type of immunization field
+	protected static final String SUBTYPE = "edu.upenn.cis350.shs_mobile.SUBTYPE"; // type of subtype of immunization field
 
 	// Initial screen types
 	protected static final String[] appointmentTypes = { "Immunizations",
@@ -84,7 +85,7 @@ public abstract class AppointmentGeneralActivity extends Activity {
 		ActionBar ab = getActionBar(); 
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
         ab.setBackgroundDrawable(colorDrawable);
-        getActionBar().setTitle("SFS Mobile");  
+        getActionBar().setTitle("SHS Mobile");  
 	}
 	
 	@Override

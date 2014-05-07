@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import java.util.LinkedList;
 
@@ -27,6 +27,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class MyAppointments extends Activity {
 	private String username = "";
@@ -39,7 +40,7 @@ public class MyAppointments extends Activity {
 		ActionBar ab = getActionBar();
 		ColorDrawable colorDrawable = new ColorDrawable(
 				Color.parseColor("#0A286E"));
-		getActionBar().setTitle("SFS Mobile");
+		getActionBar().setTitle("SHS Mobile");
 		ab.setBackgroundDrawable(colorDrawable);
 		getActionBar().setTitle("My Appointments");
 		Intent i = getIntent();

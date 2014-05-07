@@ -1,11 +1,12 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import java.util.HashMap;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.upenn.cis350.sfs_mobile.HomeScreen;
+import edu.upenn.cis350.shs_mobile.HomeScreen;
+import edu.upenn.cis350.shs_mobile.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -35,7 +36,7 @@ public class LoginActivity extends Activity {
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
         ab.setBackgroundDrawable(colorDrawable);
 		setContentView(R.layout.activity_login);
-        getActionBar().setTitle("SFS Mobile");  
+        getActionBar().setTitle("SHS Mobile");  
 		username = (EditText)findViewById(R.id.pennkey);
 		password = (EditText)findViewById(R.id.editText2);
 		//DOB = (EditText)findViewById(R.id.editText3);

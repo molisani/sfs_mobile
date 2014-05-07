@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import java.util.LinkedList;
 
@@ -6,8 +6,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import edu.upenn.cis350.sfs_mobile.MyAppointments.BackgroundTask;
-import edu.upenn.cis350.sfs_mobile.MyAppointments.PlaceholderFragment;
+import edu.upenn.cis350.shs_mobile.R;
+import edu.upenn.cis350.shs_mobile.MyAppointments.BackgroundTask;
+import edu.upenn.cis350.shs_mobile.MyAppointments.PlaceholderFragment;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Dialog;
@@ -43,7 +44,7 @@ public class MessageDetail extends Activity {
 		setContentView(R.layout.activity_message_detail);
 		ActionBar ab = getActionBar();
 		ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));
-		getActionBar().setTitle("SFS Mobile");
+		getActionBar().setTitle("SHS Mobile");
 		ab.setBackgroundDrawable(colorDrawable);
 		getActionBar().setTitle("Message");
 		Intent i = getIntent();

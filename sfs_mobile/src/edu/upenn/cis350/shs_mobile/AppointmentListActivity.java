@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 /**
  * Used in the initial screen after you click make appointment, also at various places within the workflow
@@ -13,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class AppointmentListActivity extends AppointmentGeneralActivity implements OnItemClickListener {
 	
@@ -71,23 +72,23 @@ public class AppointmentListActivity extends AppointmentGeneralActivity implemen
 		// appointment_types screen 
 		if (nextAction.equals("appointment_types")) { 
 			if (itemText.equals(appointmentTypes[0])) { // immunizations
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentListActivity.class;
 				dept = "i";
 				nextAct = "immunization_types";
 			} else if (itemText.equals(appointmentTypes[1])) { // health & wellness
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentListActivity.class;
 				dept = "h";
 				nextAct = "health_and_wellness_types";
 			} else if (itemText.equals(appointmentTypes[4])) { // women's health
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentListActivity.class;
 				dept = "w";
 				nextAct = "womens_health_types";
 			} else if (itemText.equals(appointmentTypes[2])) { // primary care
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentConfirmActivity.class;
 				dept = "p";
 				nextAct = "confirm_nonemergency";
 			} else if (itemText.equals(appointmentTypes[3])) { // sports medicine
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentConfirmActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentConfirmActivity.class;
 				dept = "s";
 				nextAct = "confirm_nonemergency";
 			} else {
@@ -98,12 +99,12 @@ public class AppointmentListActivity extends AppointmentGeneralActivity implemen
 		// immunization_types, health_and_wellness_types, women's_health_types screens
 		} else if (nextAction.equals("immunization_types")) {
 			if (itemText.equals(immunizationTypes[0])) { // other immunizations
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentListActivity.class;
 				nextAct = "sub_immunization_types";
 			} else if (itemText.equals(immunizationTypes[1]) || // ppd placement
 					itemText.equals(immunizationTypes[2]) || // flu vaccination
 					itemText.equals(immunizationTypes[3])) { // designed group immunization clinic
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentPhoneInputActivity.class;
 				nextAct = "callback";
 			} else {
 				System.out.println("ERROR 101: Could not identify list item clicked");
@@ -112,13 +113,13 @@ public class AppointmentListActivity extends AppointmentGeneralActivity implemen
 			immunization = itemText;
 		} else if (nextAction.equals("health_and_wellness_types")) { 
 			if (itemText.equals(healthAndWellnessTypes[0])) { // acupuncture
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentListActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentListActivity.class;
 				nextAct = "acupuncture_types";
 			} else if (
 					itemText.equals(healthAndWellnessTypes[1]) || // HIV
 					itemText.equals(healthAndWellnessTypes[2]) || // smoking
 					itemText.equals(healthAndWellnessTypes[3])) { // stress
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentTextInputActivity.class;
 				nextAct = "reason";
 			} else {
 				System.out.println("Error 505: Could not determine next activity.");
@@ -129,10 +130,10 @@ public class AppointmentListActivity extends AppointmentGeneralActivity implemen
 					itemText.equals(womensHealthTypes[0]) ||
 					itemText.equals(womensHealthTypes[1]) ||
 					itemText.equals(womensHealthTypes[2])) {
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentTextInputActivity.class;
 				nextAct = "reason";
 			} else if (itemText.equals(womensHealthTypes[3])) {
-				nextClass = edu.upenn.cis350.sfs_mobile.AppointmentMessageActivity.class;
+				nextClass = edu.upenn.cis350.shs_mobile.AppointmentMessageActivity.class;
 				nextAct = "womens_health_message";
 			} else {
 				System.out.println("ERROR 103: Could not identify next activity");
@@ -141,13 +142,13 @@ public class AppointmentListActivity extends AppointmentGeneralActivity implemen
 		
 		// subImmunizationTypes
 		} else if (nextAction.equals("sub_immunization_types")) {
-			nextClass = edu.upenn.cis350.sfs_mobile.AppointmentPhoneInputActivity.class;
+			nextClass = edu.upenn.cis350.shs_mobile.AppointmentPhoneInputActivity.class;
 			nextAct = "callback";
 			subtype = itemText;
 		
 		// acupunctureTypes
 		} else if (nextAction.equals("acupuncture_types")) {
-			nextClass = edu.upenn.cis350.sfs_mobile.AppointmentTextInputActivity.class;
+			nextClass = edu.upenn.cis350.shs_mobile.AppointmentTextInputActivity.class;
 			nextAct = "reason";
 			subtype = itemText;
 			

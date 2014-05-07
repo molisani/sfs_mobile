@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class AppointmentBookActivity extends AppointmentGeneralActivity implements OnItemClickListener {
 	

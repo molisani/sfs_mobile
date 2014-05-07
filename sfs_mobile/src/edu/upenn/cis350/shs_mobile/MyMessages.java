@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -32,6 +32,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class MyMessages extends Activity {
 	private int id = 0;
@@ -45,7 +46,7 @@ public class MyMessages extends Activity {
 		setContentView(R.layout.activity_my_messages);
 		ActionBar ab = getActionBar(); 
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E")); 
-        getActionBar().setTitle("SFS Mobile");  
+        getActionBar().setTitle("SHS Mobile");  
         ab.setBackgroundDrawable(colorDrawable);
         getActionBar().setTitle("My Messages");  
         Intent i = getIntent();

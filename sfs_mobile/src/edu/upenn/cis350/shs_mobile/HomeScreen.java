@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class HomeScreen extends Activity {
 	private Bundle extras = null; 
@@ -32,7 +33,7 @@ public class HomeScreen extends Activity {
 	    ActionBar ab = getActionBar(); 
         ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#0A286E"));     
         ab.setBackgroundDrawable(colorDrawable);
-        getActionBar().setTitle("SFS Mobile");  
+        getActionBar().setTitle("SHS Mobile");  
 	    Intent i = getIntent();
 	    extras = i.getExtras();
 	    return super.onCreateOptionsMenu(menu);

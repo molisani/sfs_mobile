@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 public class ServerLogin extends ServerPOST {
     public ServerLogin(String user, String pass, int year, int month, int day) {

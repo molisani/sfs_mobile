@@ -1,8 +1,9 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import android.os.Bundle;
 import android.content.Intent;
 import android.widget.TextView;
+import edu.upenn.cis350.shs_mobile.R;
 
 public class AppointmentMessageActivity extends AppointmentGeneralActivity {
 	

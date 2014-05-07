@@ -3,6 +3,6 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="edu.upenn.cis350.sfs_mobile.MessageReply"
+    tools:context="edu.upenn.cis350.shs_mobile.MessageReply"
     tools:ignore="MergeRootFrame" />
 

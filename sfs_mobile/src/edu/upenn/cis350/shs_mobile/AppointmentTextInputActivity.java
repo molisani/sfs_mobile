@@ -1,4 +1,4 @@
-package edu.upenn.cis350.sfs_mobile;
+package edu.upenn.cis350.shs_mobile;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -8,8 +8,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import edu.upenn.cis350.shs_mobile.R;
 
-public class AppointmentPhoneInputActivity extends AppointmentGeneralActivity {
+public class AppointmentTextInputActivity extends AppointmentGeneralActivity {
 	
 	private TextView messageView;
 	private EditText editField;
@@ -20,15 +21,15 @@ public class AppointmentPhoneInputActivity extends AppointmentGeneralActivity {
 		
 		// initialize
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_appointment_phone_input);
+		setContentView(R.layout.activity_appointment_text_input);
 		Intent intent = getIntent();
 		Bundle extras = intent.getExtras();
-		messageView = (TextView) findViewById(R.id.messageViewPhone);
+		messageView = (TextView) findViewById(R.id.messageView);
 		String content;
 		
 		// content
-		if (extras.getString(NEXT_ACTION).equals("callback")) {
-			content = callbackMessage; 
+		if (extras.getString(NEXT_ACTION).equals("reason")) {
+			content = reasonMessage; 
 		} else {
 			System.out.println("Error 80: Can't determine what next activity is.");
 			return;
@@ -36,8 +37,8 @@ public class AppointmentPhoneInputActivity extends AppointmentGeneralActivity {
 		
 		// display
 		messageView.setText(content);
-		editField = (EditText) findViewById(R.id.editFieldPhone);
-		submitButton = (Button) findViewById(R.id.submitButtonPhone);
+		editField = (EditText) findViewById(R.id.editField);
+		submitButton = (Button) findViewById(R.id.submitButton);
 		submitButton.setOnClickListener(new OnSubmitListener(content, this, 
 				extras));
 		
@@ -63,11 +64,11 @@ public class AppointmentPhoneInputActivity extends AppointmentGeneralActivity {
 		@Override
 		public void onClick(View v) {
 			Intent intent;
-			if (currentStatus.equals(callbackMessage)) {
+			if (currentStatus.equals(reasonMessage)) {
 				intent = new Intent(context, AppointmentCalendarActivity.class);
-				intent.putExtra(NEXT_ACTION, "calendar");
 				intent.putExtras(extras);
-				intent.putExtra(CALLBACK, editField.getText().toString());
+				intent.putExtra(NEXT_ACTION, "calendar");
+				intent.putExtra(REASON, editField.getText().toString());
 			} else {
 				System.out.println("Error 81: Can't determine next activity.");
 				return;

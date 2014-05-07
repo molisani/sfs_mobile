@@ -1,11 +1,11 @@
-package edu.upenn.cis350.sfs_mobile.tests;
+package edu.upenn.cis350.shs_mobile.tests;
 
 //import static org.junit.Assert.*;
 
 //import org.junit.Before;
 //import org.junit.Test;
 
-import edu.upenn.cis350.sfs_mobile.ServerPOST;
+import edu.upenn.cis350.shs_mobile.ServerPOST;
 
 public class ServerPOSTTest {
 
